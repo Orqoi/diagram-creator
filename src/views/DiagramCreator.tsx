@@ -11,13 +11,15 @@ import NodeDrawer from '../components/NodeDrawer';
 import WeakEntityNode from '../components/nodes/WeakEntityNode';
 import CustomEdge from '../components/edges/CustomEdge';
 import RegularEntityNode from '../components/nodes/RegularEntityNode';
+import AggregateEntityNode from '../components/nodes/AggregateEntityNode';
 
 function DiagramCreator() {
-    const nodeTypes = useMemo(() => ({ weak: WeakEntityNode, regular: RegularEntityNode }), []);
+    const nodeTypes = useMemo(() => ({ weak: WeakEntityNode, regular: RegularEntityNode, aggregate: AggregateEntityNode }), []);
 
     const initialNodes = [
         { id: '1', type: 'weak', position: { x: 0, y: 0 }, data: { label: '1' } },
         { id: '2', type: 'regular', position: { x: 0, y: 100 }, data: { label: '2' } },
+        { id: '3', type: 'aggregate', position: { x: 100, y: 200 }, data: { label: '2' } },
     ];
 
     const edgeTypes = {
