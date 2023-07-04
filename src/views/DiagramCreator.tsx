@@ -10,13 +10,14 @@ import ReactFlow, {
 import NodeDrawer from '../components/NodeDrawer';
 import WeakEntityNode from '../components/nodes/WeakEntityNode';
 import CustomEdge from '../components/edges/CustomEdge';
+import RegularEntityNode from '../components/nodes/RegularEntityNode';
 
 function DiagramCreator() {
-    const nodeTypes = useMemo(() => ({ textUpdater: WeakEntityNode }), []);
+    const nodeTypes = useMemo(() => ({ weak: WeakEntityNode, regular: RegularEntityNode }), []);
 
     const initialNodes = [
-        { id: '1', type: 'textUpdater', position: { x: 0, y: 0 }, data: { label: '1' } },
-        { id: '2', type: 'textUpdater', position: { x: 0, y: 100 }, data: { label: '2' } },
+        { id: '1', type: 'weak', position: { x: 0, y: 0 }, data: { label: '1' } },
+        { id: '2', type: 'regular', position: { x: 0, y: 100 }, data: { label: '2' } },
     ];
 
     const edgeTypes = {

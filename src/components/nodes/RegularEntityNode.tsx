@@ -1,11 +1,11 @@
 import React from 'react';
 import { Handle, Position } from 'reactflow';
 
-const WeakEntityNode = () => {
+const RegularEntityNode = () => {
   return (
     <div
       style={{
-        border: '3px double black',
+        border: '1px solid black',
         padding: '10px',
         background: '#fff',
         minWidth: '150px'
@@ -20,4 +20,4 @@ const WeakEntityNode = () => {
   );
 };
 
-export default WeakEntityNode;
+export default RegularEntityNode;

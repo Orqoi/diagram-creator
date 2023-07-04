@@ -40,7 +40,7 @@ export default function NodeDrawer() {
             ))}
           </List>
           <Divider />
-          <h5 style={{border: '1px double red'}}>Attributes</h5>
+          <h5>Attributes</h5>
           <List>
             {['Regular', 'Multi-valued', 'Derived', 'Primary'].map((text, index) => (
               <ListItem key={text} disablePadding>
