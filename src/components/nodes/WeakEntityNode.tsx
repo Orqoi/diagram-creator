@@ -11,11 +11,11 @@ const WeakEntityNode = () => {
         minWidth: '150px'
       }}
     >
-      <Handle type="source" position={Position.Top} style={{ top: 0, opacity: 0 }} />
+      <Handle type="source" position={Position.Top} style={{ top: '50%', left: '50%', opacity: 0 }} />
       <div style={{ textAlign: 'center' }}>
         <input type='text' style={{outline: 'none', border:'none', textAlign: 'center'}}/>
       </div>
-      <Handle type="target" position={Position.Bottom} style={{ top: 0, opacity: 0 }} />
+      <Handle type="target" position={Position.Bottom} style={{ top: '50%', left: '50%', opacity: 0 }} />
     </div>
   );
 };
