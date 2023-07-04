@@ -4,6 +4,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import RectangleOutlinedIcon from '@mui/icons-material/RectangleOutlined';
 import { Box, Stack, Toolbar, Button, Drawer, List, Divider, ListItem, ListItemButton } from '@mui/material';
 import {useState} from 'react'
 
@@ -27,11 +28,11 @@ export default function NodeDrawer() {
         <Box sx={{ overflow: 'auto' }}>
           <h5>Entities</h5>
           <List>
-            {['Inbox', 'Starred'].map((text, index) => (
+            {['Regular', 'Aggregate', 'Weak'].map((text, index) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                    {index % 2 === 0 ? <RectangleOutlinedIcon /> : <MailIcon />}
                   </ListItemIcon>
                   <ListItemText primary={text} />
                 </ListItemButton>
@@ -41,7 +42,7 @@ export default function NodeDrawer() {
           <Divider />
           <h5>Attributes</h5>
           <List>
-            {['All mail', 'Spam'].map((text, index) => (
+            {['Regular', 'Multi-valued', 'Derived', 'Primary'].map((text, index) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
@@ -55,7 +56,7 @@ export default function NodeDrawer() {
           <Divider />
           <h5>Relations</h5>
           <List>
-            {['Trash', 'Spam'].map((text, index) => (
+            {['Regular', 'Weak', 'Aggregate'].map((text, index) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
@@ -69,7 +70,7 @@ export default function NodeDrawer() {
           <Divider />
           <h5>Constraints</h5>
           <List>
-            {['All mail', 'Trash'].map((text, index) => (
+            {['Regular', 'Total', 'Key', 'Full'].map((text, index) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
