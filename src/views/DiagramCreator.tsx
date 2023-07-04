@@ -8,11 +8,11 @@ import ReactFlow, {
 } from 'reactflow';
 
 import NodeDrawer from '../components/NodeDrawer';
-import TextUpdaterNode from '../components/nodes/TextUpdaterNode';
+import WeakEntityNode from '../components/nodes/WeakEntityNode';
 import CustomEdge from '../components/edges/CustomEdge';
 
 function DiagramCreator() {
-    const nodeTypes = useMemo(() => ({ textUpdater: TextUpdaterNode }), []);
+    const nodeTypes = useMemo(() => ({ textUpdater: WeakEntityNode }), []);
 
     const initialNodes = [
         { id: '1', type: 'textUpdater', position: { x: 0, y: 0 }, data: { label: '1' } },

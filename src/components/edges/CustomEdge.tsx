@@ -14,6 +14,8 @@ export default function CustomEdge({
   sourceY,
   targetX,
   targetY,
+  sourcePosition,
+  targetPosition,
   style = {},
   markerEnd,
 }: EdgeProps) {
