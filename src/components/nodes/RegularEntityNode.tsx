@@ -8,7 +8,8 @@ const RegularEntityNode = () => {
         border: '1px solid black',
         padding: '10px',
         background: '#fff',
-        minWidth: '150px'
+        minHeight: 100,
+        minWidth: 200,
       }}
     >
       <Handle type="source" position={Position.Top} style={{ top: '50%', left: '50%', opacity: 0 }} />
