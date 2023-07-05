@@ -15,6 +15,7 @@ import AggregateEntityNode from '../components/nodes/entities/AggregateEntityNod
 import RegularRelationNode from '../components/nodes/relations/RegularRelationNode';
 import WeakRelationNode from '../components/nodes/relations/WeakRelationNode';
 import RegularAttributeNode from '../components/nodes/attributes/RegularAttributeNode';
+import HierarchyNode from '../components/nodes/hierarchies/HierarchyNode';
 
 function DiagramCreator() {
     const nodeTypes = useMemo(() => ({ 
@@ -23,7 +24,8 @@ function DiagramCreator() {
       aggregate: AggregateEntityNode, 
       regularRelation: RegularRelationNode,
       weakRelation: WeakRelationNode,
-      regularAttribute: RegularAttributeNode }), []);
+      regularAttribute: RegularAttributeNode,
+      hierarchy: HierarchyNode }), []);
 
     const initialNodes = [
         { id: '1', type: 'weak', position: { x: 0, y: 0 }, data: { label: '1' } },
@@ -32,6 +34,7 @@ function DiagramCreator() {
         { id: '4', type: 'regularRelation', position: { x: 300, y: 400 }, data: { label: '4' } },
         { id: '5', type: 'weakRelation', position: { x: 400, y: 500 }, data: { label: '5' } },
         { id: '6', type: 'regularAttribute', position: { x: 600, y: 500 }, data: { label: '6' } },
+        { id: '7', type: 'hierarchy', position: { x: 800, y: 500 }, data: { label: '7' } }
     ];
 
     const edgeTypes = {
