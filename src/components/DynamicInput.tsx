@@ -7,7 +7,7 @@ function convertRemToPixels(rem) {
 }
 
 
-function DynamicInput() {
+function DynamicInput({ underline = false}) {
     const FONT_SIZE = convertRemToPixels(1)
     const DEFAULT_INPUT_WIDTH = 100
 
@@ -24,7 +24,8 @@ function DynamicInput() {
     const useStyles = makeStyles({
         inputCenter: {
             textAlign: "center",
-            width: `${inputWidth}px`
+            width: `${inputWidth}px`,
+            textDecoration: underline ? 'underline' : 'none'
         }
     })
     const classes = useStyles()

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Handle, Position } from 'reactflow';
-import DynamicInput from '../DynamicInput';
+import DynamicInput from '../../DynamicInput';
 
 const WeakEntityNode = () => {
   return (

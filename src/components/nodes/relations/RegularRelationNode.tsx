@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React, { useEffect, useRef, useState } from 'react';
-import DynamicInput from '../DynamicInput';
+import DynamicInput from '../../DynamicInput';
 
 function convertToDiamondLength(w) {
     return Math.sqrt((w * w) / 2)
@@ -16,7 +16,9 @@ function calculateLeftMargin(l) {
     return (h - l) / 2
 }
 
-function AggregateEntityNode() {
+
+function RegularRelationNode() {
+    
 
     const observedDiv: any = useRef<HTMLDivElement>(null);
     const [width, setWidth] = useState(200);
@@ -46,20 +48,19 @@ function AggregateEntityNode() {
             lineHeight: '1rem',
             width: 'fit-content',
             textAlign: 'center',
-            border: '1px solid black',
             display: 'flex',
-            background: '#fff',
             justifyContent: 'center',
             alignItems: 'center',
         },
         decorator: {
             position: 'absolute',
+            background: '#fff',
             left: calculateLeftMargin(convertToDiamondLength(width - 2)),
             height: convertToDiamondLength(width - 2),
             width: convertToDiamondLength(width - 2),
             border: '2px solid black',
             
-            transform: `rotateX(${getRotationAngle(50 - 8, (Math.sqrt(2) * convertToDiamondLength(width - 2) / 2))}deg) rotateZ(45deg) translate3d(0,0,0)`
+            transform: `rotateX(${getRotationAngle(50, (Math.sqrt(2) * convertToDiamondLength(width - 2) / 2))}deg) rotateZ(45deg) translate3d(0,0,0)`
         }
     })
     const classes = useStyles()
@@ -74,4 +75,4 @@ function AggregateEntityNode() {
         </Box>)
 }
 
-export default AggregateEntityNode
+export default RegularRelationNode

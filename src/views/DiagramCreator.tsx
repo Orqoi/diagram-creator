@@ -8,13 +8,13 @@ import ReactFlow, {
 } from 'reactflow';
 
 import NodeDrawer from '../components/NodeDrawer';
-import WeakEntityNode from '../components/nodes/WeakEntityNode';
+import WeakEntityNode from '../components/nodes/entities/WeakEntityNode';
 import CustomEdge from '../components/edges/CustomEdge';
-import RegularEntityNode from '../components/nodes/RegularEntityNode';
-import AggregateEntityNode from '../components/nodes/AggregateEntityNode';
-import RegularRelationNode from '../components/nodes/RegularRelationNode';
-import WeakRelationNode from '../components/nodes/WeakRelationNode';
-import RegularAttributeNode from '../components/nodes/RegularAttributeNode';
+import RegularEntityNode from '../components/nodes/entities/RegularEntityNode';
+import AggregateEntityNode from '../components/nodes/entities/AggregateEntityNode';
+import RegularRelationNode from '../components/nodes/relations/RegularRelationNode';
+import WeakRelationNode from '../components/nodes/relations/WeakRelationNode';
+import RegularAttributeNode from '../components/nodes/attributes/RegularAttributeNode';
 
 function DiagramCreator() {
     const nodeTypes = useMemo(() => ({ 

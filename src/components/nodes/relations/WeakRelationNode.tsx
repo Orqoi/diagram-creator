@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React, { useEffect, useRef, useState } from 'react';
-import DynamicInput from '../DynamicInput';
+import DynamicInput from '../../DynamicInput';
 
 function convertToDiamondLength(w) {
     return Math.sqrt((w * w) / 2)
@@ -17,7 +17,7 @@ function calculateLeftMargin(l) {
 }
 
 
-function RegularRelationNode() {
+function WeakRelationNode() {
     
 
     const observedDiv: any = useRef<HTMLDivElement>(null);
@@ -58,7 +58,7 @@ function RegularRelationNode() {
             left: calculateLeftMargin(convertToDiamondLength(width - 2)),
             height: convertToDiamondLength(width - 2),
             width: convertToDiamondLength(width - 2),
-            border: '2px solid black',
+            border: '6px double black',
             
             transform: `rotateX(${getRotationAngle(50, (Math.sqrt(2) * convertToDiamondLength(width - 2) / 2))}deg) rotateZ(45deg) translate3d(0,0,0)`
         }
@@ -75,4 +75,4 @@ function RegularRelationNode() {
         </Box>)
 }
 
-export default RegularRelationNode
+export default WeakRelationNode
