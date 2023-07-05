@@ -1,5 +1,6 @@
 import React from 'react';
 import { Handle, Position } from 'reactflow';
+import DynamicInput from '../DynamicInput';
 
 const WeakEntityNode = () => {
   return (
@@ -10,13 +11,14 @@ const WeakEntityNode = () => {
         background: '#fff',
         minHeight: 100,
         minWidth: 200,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
       }}
     >
-      <Handle type="source" position={Position.Top} style={{ top: '50%', left: '50%', opacity: 0 }} />
-      <div style={{ textAlign: 'center' }}>
-        <input type='text' style={{outline: 'none', border:'none', textAlign: 'center'}}/>
-      </div>
-      <Handle type="target" position={Position.Bottom} style={{ top: '50%', left: '50%', opacity: 0 }} />
+      <Handle type="source" position={Position.Top} style={{ top: 0, opacity: 0 }} />
+      <DynamicInput />
+      <Handle type="target" position={Position.Bottom} style={{ top: 0, opacity: 0 }} />
     </div>
   );
 };
