@@ -56,7 +56,7 @@ export default function NodeDrawer() {
           <Divider />
           <h5>Relations</h5>
           <List>
-            {['Regular', 'Weak', 'Aggregate'].map((text, index) => (
+            {['Regular', 'Weak'].map((text, index) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton>
                   <ListItemIcon>

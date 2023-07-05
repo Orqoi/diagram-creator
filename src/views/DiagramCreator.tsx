@@ -13,15 +13,25 @@ import CustomEdge from '../components/edges/CustomEdge';
 import RegularEntityNode from '../components/nodes/RegularEntityNode';
 import AggregateEntityNode from '../components/nodes/AggregateEntityNode';
 import RegularRelationNode from '../components/nodes/RegularRelationNode';
+import WeakRelationNode from '../components/nodes/WeakRelationNode';
+import RegularAttributeNode from '../components/nodes/RegularAttributeNode';
 
 function DiagramCreator() {
-    const nodeTypes = useMemo(() => ({ weak: WeakEntityNode, regular: RegularEntityNode, aggregate: AggregateEntityNode, regularRelation: RegularRelationNode }), []);
+    const nodeTypes = useMemo(() => ({ 
+      weak: WeakEntityNode, 
+      regular: RegularEntityNode, 
+      aggregate: AggregateEntityNode, 
+      regularRelation: RegularRelationNode,
+      weakRelation: WeakRelationNode,
+      regularAttribute: RegularAttributeNode }), []);
 
     const initialNodes = [
         { id: '1', type: 'weak', position: { x: 0, y: 0 }, data: { label: '1' } },
-        { id: '2', type: 'regular', position: { x: 0, y: 100 }, data: { label: '2' } },
-        { id: '3', type: 'aggregate', position: { x: 100, y: 200 }, data: { label: '3' } },
-        { id: '4', type: 'regularRelation', position: { x: 200, y: 400 }, data: { label: '4' } },
+        { id: '2', type: 'regular', position: { x: 100, y: 100 }, data: { label: '2' } },
+        { id: '3', type: 'aggregate', position: { x: 200, y: 200 }, data: { label: '3' } },
+        { id: '4', type: 'regularRelation', position: { x: 300, y: 400 }, data: { label: '4' } },
+        { id: '5', type: 'weakRelation', position: { x: 400, y: 500 }, data: { label: '5' } },
+        { id: '6', type: 'regularAttribute', position: { x: 600, y: 500 }, data: { label: '6' } },
     ];
 
     const edgeTypes = {
