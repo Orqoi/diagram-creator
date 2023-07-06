@@ -59,7 +59,12 @@ function AggregateEntityNode() {
             width: convertToDiamondLength(width - 2),
             border: '2px solid black',
             
-            transform: `rotateX(${getRotationAngle(50 - 8, (Math.sqrt(2) * convertToDiamondLength(width - 2) / 2))}deg) rotateZ(45deg) translate3d(0,0,0)`
+            transform: `rotateX(${getRotationAngle(50 - 8, (Math.sqrt(2) * convertToDiamondLength(width - 2) / 2))}deg) rotateZ(45deg) translate3d(0,0,0)`,
+            WebkitTransform: `rotateX(${getRotationAngle(50 - 8, (Math.sqrt(2) * convertToDiamondLength(width - 2) / 2))}deg) rotateZ(45deg) translate3d(0,0,0)`,
+            WebkitTransformStyle: 'preserve-3d',
+            transformStyle: 'preserve-3d',
+            WebkitBackfaceVisibility: 'hidden',
+            outline: '2px solid transparent'
         }
     })
     const classes = useStyles()

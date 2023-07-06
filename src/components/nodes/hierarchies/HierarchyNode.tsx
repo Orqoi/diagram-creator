@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles';
 const useStyles = makeStyles({
   triangle: {
     width: '100px',
-    height: '100px',
+    height: '60px'
   },
   content: {
     fontSize: '20px',

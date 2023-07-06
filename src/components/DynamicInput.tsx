@@ -35,6 +35,7 @@ function DynamicInput({ underline = false}) {
                 classes={{
                     input: classes.inputCenter
                 }}
+                placeholder='text'
                 value={textValue}
                 onChange={(e) => setTextValue(e.target.value)}
                 style={{ position: 'relative', zIndex: 2 }} />
