@@ -50,7 +50,7 @@ function AggregateEntityNode() {
             display: 'flex',
             background: '#fff',
             justifyContent: 'center',
-            alignItems: 'center',
+            alignItems: 'center'
         },
         decorator: {
             position: 'absolute',

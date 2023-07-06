@@ -2,20 +2,14 @@ import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles({
   triangle: {
-    position: 'relative',
-    width: 0,
-    height: 0,
-    borderBottom: 'none',
-    borderLeft: '50px solid transparent',
-    borderRight: '50px solid transparent',
-    borderTop: '100px solid black',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: '100px',
+    height: '100px',
   },
   content: {
     fontSize: '20px',
     fontWeight: 'bold',
+    dominantBaseline: 'middle',
+    textAnchor: 'middle',
   },
 });
 
@@ -23,9 +17,10 @@ function HierarchyNode() {
   const classes = useStyles();
 
   return (
-    <div className={classes.triangle}>
-      <div className={classes.content}>ISA</div>
-    </div>
+    <svg className={classes.triangle} viewBox="0 0 100 100">
+      <polygon points="0,100 50,0 100,100" fill="white" stroke="black" strokeWidth="1" />
+      <text className={classes.content} x="50" y="60">ISA</text>
+    </svg>
   );
 }
 
