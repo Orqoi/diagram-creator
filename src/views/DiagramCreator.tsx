@@ -40,6 +40,7 @@ function DiagramCreator() {
     const edgeTypes = {
         customedge: CustomEdge,
     };
+    const proOptions = { hideAttribution: true };
 
     const initialEdges = [];
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
@@ -57,7 +58,7 @@ function DiagramCreator() {
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
-
+          proOptions={proOptions}
         >
           <Controls position="bottom-right" />
         </ReactFlow>
