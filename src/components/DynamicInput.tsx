@@ -31,14 +31,14 @@ function DynamicInput({ underline = false}) {
     const classes = useStyles()
   return (
     <Input
-                disableUnderline
-                classes={{
-                    input: classes.inputCenter
-                }}
-                placeholder='text'
-                value={textValue}
-                onChange={(e) => setTextValue(e.target.value)}
-                style={{ position: 'relative', zIndex: 2 }} />
+        disableUnderline
+        classes={{
+            input: classes.inputCenter
+        }}
+        placeholder='text'
+        value={textValue}
+        onChange={(e) => setTextValue(e.target.value)}
+        style={{ position: 'relative', zIndex: 2 }} />
   )
 }
 

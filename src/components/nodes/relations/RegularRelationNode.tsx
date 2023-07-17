@@ -1,78 +1,60 @@
-import { Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import React, { useEffect, useRef, useState } from 'react';
-import DynamicInput from '../../DynamicInput';
+import React, {useEffect, useState} from 'react'
+import { Input } from '@mui/material';
 
-function convertToDiamondLength(w) {
-    return Math.sqrt((w * w) / 2)
+function convertRemToPixels(rem) {
+    return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
 }
-
-function getRotationAngle(a, h) {
-    return Math.acos(a / h) * (180 / Math.PI)
-}
-
-function calculateLeftMargin(l) {
-    const h = Math.sqrt(2) * l
-    return (h - l) / 2
-}
-
 
 function RegularRelationNode() {
-    
 
-    const observedDiv: any = useRef<HTMLDivElement>(null);
-    const [width, setWidth] = useState(200);
+  const FONT_SIZE = convertRemToPixels(1)
+    const DEFAULT_INPUT_WIDTH = 100
+
+    const [textValue, setTextValue] = useState("")
+    const height = 100
+    const [inputWidth, setInputWidth] = useState(DEFAULT_INPUT_WIDTH)
+
     useEffect(() => {
-        if (!observedDiv.current) {
-            return;
+        if (textValue.length * FONT_SIZE > DEFAULT_INPUT_WIDTH) {
+            setInputWidth((textValue.length + 1) * FONT_SIZE)
+        } else {
+            setInputWidth(DEFAULT_INPUT_WIDTH)
         }
+    }, [textValue, FONT_SIZE])
 
-        const resizeObserver = new ResizeObserver(() => {
-            if (observedDiv.current.offsetWidth !== width) {
-                setWidth(observedDiv.current.offsetWidth);
-            }
-        });
+  const useStyles = makeStyles({
+    diamond: {
+      height: height,
+      width: inputWidth + 100
+    },
+    inputCenter: {
+        textAlign: "center",
+        width: `${inputWidth}px`
+    }
+  });
+  const classes = useStyles();
+  const points = `${(inputWidth + 100) / 2},1 1,50 ${(inputWidth + 100) / 2},99 ${(inputWidth + 100) - 1},50`;
+  const foreignObjectHeight = 40; // Adjust this value based on the desired height of the foreignObject
+  const textX = ((inputWidth + 100) - inputWidth) / 2;
+  const textY = (height - foreignObjectHeight + 5) / 2;
 
-        resizeObserver.observe(observedDiv.current);
-
-        return function cleanup() {
-            resizeObserver.disconnect();
-        }
-    }, [observedDiv, width])
-
-    const useStyles = makeStyles({
-        diamond: {
-            position: 'relative',
-            minHeight: 100,
-            minWidth: 200,
-            lineHeight: '1rem',
-            width: 'fit-content',
-            textAlign: 'center',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-        },
-        decorator: {
-            position: 'absolute',
-            background: '#fff',
-            left: calculateLeftMargin(convertToDiamondLength(width - 2)),
-            height: convertToDiamondLength(width - 2),
-            width: convertToDiamondLength(width - 2),
-            border: '2px solid black',
-            
-            transform: `rotateX(${getRotationAngle(50, (Math.sqrt(2) * convertToDiamondLength(width - 2) / 2))}deg) rotateZ(45deg) translate3d(0,0,0)`
-        }
-    })
-    const classes = useStyles()
-
-
-    return (
-        <Box className={classes.diamond} ref={observedDiv}>
-            <DynamicInput />
-            <Box className={classes.decorator}>
-            </Box>
-
-        </Box>)
+  return (
+    <svg className={classes.diamond}>
+      <polygon points={points} fill="white" stroke="black" strokeWidth="1" />
+      <foreignObject x={textX} y={textY} width={inputWidth + 2} height={foreignObjectHeight}>
+        <Input
+            disableUnderline
+            classes={{
+                input: classes.inputCenter
+            }}
+            placeholder='text'
+            value={textValue}
+            onChange={(e) => setTextValue(e.target.value)}
+            style={{ position: 'relative', zIndex: 2 }} />
+      </foreignObject>
+    </svg>
+  );
 }
 
-export default RegularRelationNode
+export default RegularRelationNode;

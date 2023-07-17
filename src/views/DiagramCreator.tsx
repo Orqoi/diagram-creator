@@ -41,7 +41,7 @@ function DiagramCreator() {
         customedge: CustomEdge,
     };
 
-    const initialEdges = [{ id: 'e1-2', source: '1', target: '2', type: 'customedge' }];
+    const initialEdges = [];
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const onConnect = useCallback((params: any) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
