@@ -47,21 +47,28 @@ function DiagramCreator() {
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const onConnect = useCallback((params: any) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
   return (
-    <Stack height="100%" width="100%" direction="row">
-        <NodeDrawer />
+    <Stack height="100%" width="100%">
+        <h1 style={{backgroundColor: 'blue', margin: 0}}>Helpers</h1>
+      
+        <Stack direction="row" height="100%" width="100%">
+          <NodeDrawer setNodes={setNodes} />
 
-        <ReactFlow
-          nodeTypes={nodeTypes}
-          edgeTypes={edgeTypes}
-          nodes={nodes}
-          edges={edges}
-          onNodesChange={onNodesChange}
-          onEdgesChange={onEdgesChange}
-          onConnect={onConnect}
-          proOptions={proOptions}
-        >
-          <Controls position="bottom-right" />
-        </ReactFlow>
+          <ReactFlow
+            nodeTypes={nodeTypes}
+            edgeTypes={edgeTypes}
+            nodes={nodes}
+            edges={edges}
+            onNodesChange={onNodesChange}
+            onEdgesChange={onEdgesChange}
+            onConnect={onConnect}
+            proOptions={proOptions}
+          >
+            <Controls position="bottom-right" />
+          </ReactFlow>
+          <NodeDrawer setNodes={setNodes} />
+
+        </Stack>
+        
       </Stack>
   )
 }
