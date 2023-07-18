@@ -16,7 +16,7 @@ import DiamondIcon from '@mui/icons-material/Diamond';
 import { Switch } from '@mui/material';
 import MaterialUISwitch from './MaterialUISwitch';
 
-const pages = ['Home', 'Dashboard', 'Documentation'];
+const pages = ['Home', /*'Dashboard',*/ 'Documentation'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function TopBar() {

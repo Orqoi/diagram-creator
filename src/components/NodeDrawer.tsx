@@ -1,25 +1,35 @@
-import { Stack, Grid, IconButton, Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/material';
+import { Card, InputAdornment, Stack, Grid, CardContent, Typography, Accordion, AccordionSummary, AccordionDetails, TextField, Box } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import RectangleOutlinedIcon from '@mui/icons-material/RectangleOutlined';
+import SearchIcon from '@mui/icons-material/Search';
+import NodeCard from './NodeCard';
 
 export default function NodeDrawer({ setNodes }) {
 
   return (
-    <Stack direction='row'>
-      <Accordion sx={{minWidth: 300}} square>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{minHeight: 0, minWidth: 0, padding: 0}}>
-          <h5>ER General</h5>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Grid container spacing={1} border='1px solid red'>
-            <Grid item xs={3}>
-              <IconButton onClick={() => setNodes((nds) => nds.concat({ id: '8', type: 'regular', position: { x: 1000, y: 1000 }, data: { label: '8' } }))}>
-                <RectangleOutlinedIcon/>
-              </IconButton>
-            </Grid>
+    <Stack direction='column' sx={{minWidth: 300, borderLeft: '1px solid lightgrey', borderRight:'1px solid lightgrey', pt: 3}}>
+      <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', pb: 3, m: 1, borderBottom: '1px solid lightgrey'}}>
+            <TextField 
+              placeholder='Search Here'
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                )
+            }}/>
+          </Box>
+        
+          <Grid 
+            container
+            spacing={1}
+            flexGrow={1}
+            border='1px solid red'>
+            <NodeCard/>
+            <NodeCard/>
+            <NodeCard/>
+            <NodeCard/>
           </Grid>
-        </AccordionDetails>
-      </Accordion>
     </Stack>
   );
 }

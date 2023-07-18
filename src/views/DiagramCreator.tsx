@@ -16,6 +16,7 @@ import RegularRelationNode from '../components/nodes/relations/RegularRelationNo
 import WeakRelationNode from '../components/nodes/relations/WeakRelationNode';
 import RegularAttributeNode from '../components/nodes/attributes/RegularAttributeNode';
 import HierarchyNode from '../components/nodes/hierarchies/HierarchyNode';
+import DiagramAppBar from '../components/DiagramAppBar';
 
 function DiagramCreator() {
     const nodeTypes = useMemo(() => ({ 
@@ -28,8 +29,8 @@ function DiagramCreator() {
       hierarchy: HierarchyNode }), []);
 
     const initialNodes = [
-        { id: '1', type: 'weak', position: { x: 0, y: 0 }, data: { label: '1' } },
-        { id: '2', type: 'regular', position: { x: 100, y: 100 }, data: { label: '2' } },
+        { id: '1', type: 'weak', position: { x: 50, y: 50 }, data: { label: '1' } },
+        { id: '2', type: 'regular', position: { x: 450, y: 100 }, data: { label: '2' } },
         { id: '3', type: 'aggregate', position: { x: 200, y: 200 }, data: { label: '3' } },
         { id: '4', type: 'regularRelation', position: { x: 300, y: 400 }, data: { label: '4' } },
         { id: '5', type: 'weakRelation', position: { x: 400, y: 500 }, data: { label: '5' } },
@@ -48,7 +49,7 @@ function DiagramCreator() {
   const onConnect = useCallback((params: any) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
   return (
     <Stack height="100%" width="100%">
-        <h1 style={{backgroundColor: 'blue', margin: 0}}>Helpers</h1>
+        <DiagramAppBar/>
       
         <Stack direction="row" height="100%" width="100%">
           <NodeDrawer setNodes={setNodes} />
@@ -65,7 +66,7 @@ function DiagramCreator() {
           >
             <Controls position="bottom-right" />
           </ReactFlow>
-          <NodeDrawer setNodes={setNodes} />
+          <Stack width={500} border='1px solid black'>Some Content</Stack>
 
         </Stack>
         
