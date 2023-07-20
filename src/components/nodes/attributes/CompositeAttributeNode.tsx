@@ -6,14 +6,15 @@ const CompositeAttributeNode = () => {
   return (
     <div
       style={{
-        border: '3px double black',
+        border: '1px solid black',
         padding: '10px',
         background: '#fff',
         minHeight: 100,
         minWidth: 200,
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        borderRadius: '50%'
       }}
     >
       <Handle type="source" position={Position.Top} style={{ top: 0, opacity: 0 }} />

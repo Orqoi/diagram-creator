@@ -1,19 +1,17 @@
-import { Card, Stack, Grid, CardContent, Typography, Accordion, AccordionSummary, AccordionDetails, TextField, Box } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Card, Grid, CardContent, Typography } from '@mui/material';
 import RectangleOutlinedIcon from '@mui/icons-material/RectangleOutlined';
-import SearchIcon from '@mui/icons-material/Search';
 
-function NodeCard() {
+function NodeCard({title, type, setNodes, nodes}) {
   return (
-    <Grid item xs={6}>
-              <Card sx={{ display:'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', cursor: 'pointer', backgroundColor: '#f6f7fb'}}>
-                <CardContent>
-                  <RectangleOutlinedIcon color='primary' sx={{ fontSize: '1rem'}} />
-                </CardContent>
-                <Typography>Regular Entity</Typography>
-              </Card>
-            </Grid>
+    <Grid item xs={6} sm={6} onClick={() => setNodes(nds => nds.concat({ id: JSON.stringify(nodes.length + 1), type: type, position: { x: 800, y: 500 }, data: { label: nodes.length + 1 } }))}>
+      <Card sx={{ display:'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', cursor: 'pointer', backgroundColor: '#f6f7fb'}}>
+        <CardContent>
+          <RectangleOutlinedIcon color='primary' sx={{ fontSize: '1rem'}} />
+        </CardContent>
+        <Typography>{title}</Typography>
+      </Card>
+    </Grid>
   )
 }
 
-export default NodeCard
+export default NodeCard;

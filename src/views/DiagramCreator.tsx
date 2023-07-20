@@ -17,6 +17,10 @@ import WeakRelationNode from '../components/nodes/relations/WeakRelationNode';
 import RegularAttributeNode from '../components/nodes/attributes/RegularAttributeNode';
 import HierarchyNode from '../components/nodes/hierarchies/HierarchyNode';
 import DiagramAppBar from '../components/DiagramAppBar';
+import CompositeAttributeNode from '../components/nodes/attributes/CompositeAttributeNode';
+import MultiValuedAttributeNode from '../components/nodes/attributes/MultiValuedAttributeNode';
+import PrimaryAttributeNode from '../components/nodes/attributes/PrimaryAttributeNode';
+import DerivedAttributeNode from '../components/nodes/attributes/DerivedAttributeNode';
 
 function DiagramCreator() {
     const nodeTypes = useMemo(() => ({ 
@@ -26,21 +30,19 @@ function DiagramCreator() {
       regularRelation: RegularRelationNode,
       weakRelation: WeakRelationNode,
       regularAttribute: RegularAttributeNode,
-      hierarchy: HierarchyNode }), []);
+      hierarchy: HierarchyNode,
+      compositeAttribute: CompositeAttributeNode,
+      multiValuedAttribute: MultiValuedAttributeNode,
+      primaryAttribute: PrimaryAttributeNode,
+      derivedAttribute: DerivedAttributeNode }), []);
 
     const initialNodes = [
-        { id: '1', type: 'weak', position: { x: 50, y: 50 }, data: { label: '1' } },
-        { id: '2', type: 'regular', position: { x: 450, y: 100 }, data: { label: '2' } },
-        { id: '3', type: 'aggregate', position: { x: 200, y: 200 }, data: { label: '3' } },
-        { id: '4', type: 'regularRelation', position: { x: 300, y: 400 }, data: { label: '4' } },
-        { id: '5', type: 'weakRelation', position: { x: 400, y: 500 }, data: { label: '5' } },
-        { id: '6', type: 'regularAttribute', position: { x: 600, y: 500 }, data: { label: '6' } },
-        { id: '7', type: 'hierarchy', position: { x: 800, y: 500 }, data: { label: '7' } }
+
     ];
 
-    const edgeTypes = {
+    const edgeTypes = useMemo(() => ({
         customedge: CustomEdge,
-    };
+    }), []);
     const proOptions = { hideAttribution: true };
 
     const initialEdges = [];
@@ -52,7 +54,7 @@ function DiagramCreator() {
         <DiagramAppBar/>
       
         <Stack direction="row" height="100%" width="100%">
-          <NodeDrawer setNodes={setNodes} />
+          <NodeDrawer nodes={nodes} setNodes={setNodes} />
 
           <ReactFlow
             nodeTypes={nodeTypes}
@@ -66,7 +68,7 @@ function DiagramCreator() {
           >
             <Controls position="bottom-right" />
           </ReactFlow>
-          <Stack width={500} border='1px solid black'>Some Content</Stack>
+          <Stack width={500} border='1px solid lightgray'>Some Content</Stack>
 
         </Stack>
         

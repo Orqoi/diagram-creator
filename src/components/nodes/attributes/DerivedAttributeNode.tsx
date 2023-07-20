@@ -2,11 +2,11 @@ import React from 'react';
 import { Handle, Position } from 'reactflow';
 import DynamicInput from '../../DynamicInput';
 
-const MultiValuedAttributeNode = () => {
+const DerivedAttributeNode = () => {
   return (
     <div
       style={{
-        border: '3px double black',
+        border: '1px dashed black',
         padding: '10px',
         background: '#fff',
         minHeight: 100,
@@ -24,4 +24,4 @@ const MultiValuedAttributeNode = () => {
   );
 };
 
-export default MultiValuedAttributeNode;
+export default DerivedAttributeNode;
