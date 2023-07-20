@@ -45,15 +45,15 @@ function DiagramCreator() {
     const store = useStoreApi().getState()
    
     const getCenter = () => {
-      const {height, width} = store
+      // const {height, width} = store
       const {x, y} = reactFlowInstance.getViewport()
-      console.log({x, y})
-      console.log(store)
-      const center = {
-        x: -x + width / 2,
-        y: -y + height / 2
-      }
-      return center
+      // console.log({x, y})
+      // console.log(store)
+      // const center = {
+      //   x: -x + width / 2,
+      //   y: -y + height / 2
+      // }
+      return reactFlowInstance.project({x, y})
     }
     // useEffect(() => {
     //   if (diagramRef.current) {
@@ -92,6 +92,8 @@ function DiagramCreator() {
             onEdgesChange={onEdgesChange}
             onConnect={onConnect}
             proOptions={proOptions}
+            maxZoom={10}
+            minZoom={0}
           >
             <Controls position="bottom-right" />
           </ReactFlow>
