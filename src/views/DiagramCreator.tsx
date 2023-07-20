@@ -1,10 +1,12 @@
-import { Stack } from '@mui/material';
+import { Stack, Button } from '@mui/material';
 import { useCallback, useMemo } from 'react';
 import ReactFlow, {
   Controls,
+  useReactFlow,
   useNodesState,
   useEdgesState,
-  addEdge
+  addEdge,
+  useStoreApi
 } from 'reactflow';
 
 import NodeDrawer from '../components/NodeDrawer';
@@ -39,6 +41,31 @@ function DiagramCreator() {
     const initialNodes = [
 
     ];
+    const reactFlowInstance = useReactFlow()
+    const store = useStoreApi().getState()
+   
+    const getCenter = () => {
+      const {height, width} = store
+      const {x, y} = reactFlowInstance.getViewport()
+      console.log({x, y})
+      console.log(store)
+      const center = {
+        x: -x + width / 2,
+        y: -y + height / 2
+      }
+      return center
+    }
+    // useEffect(() => {
+    //   if (diagramRef.current) {
+    //     // Access getBoundingClientRect() method only when diagramRef.current is not null
+    //     const { height, width } = store
+    //     const {x, y} = diagramRef.current.getBoundingClientRect()
+    //     const centerX = x + (width / 2)
+    //     const centerY = y + (height / 2)
+    //     setCenter(reactFlowInstance.project({x: centerX / 2, y: centerY / 2}))
+    //   }
+    // }, [diagramRef.current, reactFlowInstance]);
+
 
     const edgeTypes = useMemo(() => ({
         customedge: CustomEdge,
@@ -54,7 +81,7 @@ function DiagramCreator() {
         <DiagramAppBar/>
       
         <Stack direction="row" height="100%" width="100%">
-          <NodeDrawer nodes={nodes} setNodes={setNodes} />
+          <NodeDrawer nodes={nodes} setNodes={setNodes} getCenter={getCenter} />
 
           <ReactFlow
             nodeTypes={nodeTypes}
@@ -68,7 +95,9 @@ function DiagramCreator() {
           >
             <Controls position="bottom-right" />
           </ReactFlow>
-          <Stack width={500} border='1px solid lightgray'>Some Content</Stack>
+          <Stack width={500} border='1px solid lightgray'>
+            Hello
+          </Stack>
 
         </Stack>
         

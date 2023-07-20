@@ -3,7 +3,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import NodeCard from './NodeCard';
 import NodeTypes from '../constants/NodeTypes';
 
-export default function NodeDrawer({ setNodes, nodes }) {
+export default function NodeDrawer({ setNodes, nodes, getCenter }) {
 
   return (
     <Stack direction='column' sx={{width: 600, paddingLeft: 1, paddingRight: 1, borderLeft: '1px solid lightgrey', borderRight:'1px solid lightgrey', pt: 3}}>
@@ -25,7 +25,7 @@ export default function NodeDrawer({ setNodes, nodes }) {
             maxHeight='80%'
             sx={{paddingLeft: 1, paddingRight: 1, paddingBottom: 1, overflowY:'auto'}}
             >
-            {NodeTypes.map((nodeType, idx) => <NodeCard key={idx} icon={nodeType.icon} type={nodeType.title} title={nodeType.description} setNodes={setNodes} nodes={nodes}/>)}
+            {NodeTypes.map((nodeType, idx) => <NodeCard key={idx} getCenter={getCenter} icon={nodeType.icon} type={nodeType.title} title={nodeType.description} setNodes={setNodes} nodes={nodes}/>)}
           </Grid>
     </Stack>
   );
