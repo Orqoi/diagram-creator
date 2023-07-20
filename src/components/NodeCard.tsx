@@ -15,7 +15,7 @@ function NodeCard({title, type, setNodes, nodes, icon, getCenter}) {
         <CardContent sx={{paddingBottom: 1, paddingTop: 0, paddingRight: 0, paddingLeft: 0}}>
           {icon}
         </CardContent>
-        <Typography>{title}</Typography>
+        <Typography align='center'>{title}</Typography>
       </Card>
     </Grid>
   )

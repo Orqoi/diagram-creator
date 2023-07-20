@@ -26,7 +26,7 @@ export default function NodeDrawer({ setNodes, nodes, getCenter }) {
         <CustomAccordion title="Entities" data={data.filter(item => item.type === 'entity')} getCenter={getCenter} nodes={nodes} setNodes={setNodes}/>
         <CustomAccordion title="Relations" data={data.filter(item => item.type === 'relation')} getCenter={getCenter} nodes={nodes} setNodes={setNodes}/>
         <CustomAccordion title="Attributes" data={data.filter(item => item.type === 'attribute')} getCenter={getCenter} nodes={nodes} setNodes={setNodes}/>
-        <CustomAccordion title="Connections and Miscallaneous" data={data.filter(item => item.type === 'miscallaneous')} getCenter={getCenter} nodes={nodes} setNodes={setNodes}/>
+        <CustomAccordion title="Constraints and Miscallaneous" data={data.filter(item => item.type === 'miscallaneous' || item.type === 'constraint')} getCenter={getCenter} nodes={nodes} setNodes={setNodes}/>
       </Stack>
       
     </Stack>

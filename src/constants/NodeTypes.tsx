@@ -2,11 +2,15 @@ import AggregateEntityNodeIcon from "../icons/AggregateEntityNodeIcon";
 import CompositeAttributeNodeIcon from "../icons/CompositeAttributeNodeIcon";
 import DerivedAttributeNodeIcon from "../icons/DerivedAttributeNodeIcon";
 import HierarchyNodeIcon from "../icons/HierarchyNodeIcon";
+import KeyEdgeIcon from "../icons/KeyEdgeIcon";
 import MultiValuedAttributeNodeIcon from "../icons/MultiValuedAttributeNodeIcon";
+import PartialParticipationEdgeIcon from "../icons/PartialParticipationEdgeIcon";
 import PrimaryAttributeNodeIcon from "../icons/PrimaryAttributeNodeIcon";
 import RegularAttributeNodeIcon from "../icons/RegularAttributeNodeIcon";
+import RegularEdgeIcon from "../icons/RegularEdgeIcon";
 import RegularEntityNodeIcon from "../icons/RegularEntityNodeIcon"
 import RegularRelationNodeIcon from "../icons/RegularRelationNodeIcon";
+import TotalParticipationEdgeIcon from "../icons/TotalParticipationEdgeIcon";
 import WeakEntityNodeIcon from "../icons/WeakEntityNodeIcon";
 import WeakRelationNodeIcon from "../icons/WeakRelationNodeIcon";
 
@@ -74,8 +78,32 @@ const NodeTypes = [
     {
       title: 'hierarchy',
       type: 'miscallaneous',
-      description: 'Hierarchy',
+      description: 'ISA Hierarchy',
       icon: <HierarchyNodeIcon />,
+    },
+    {
+      title: 'keyEdge',
+      type: 'constraint',
+      description: 'Key Constraint',
+      icon: <KeyEdgeIcon />,
+    },
+    {
+      title: 'regularEdge',
+      type: 'constraint',
+      description: 'Regular Constraint',
+      icon: <RegularEdgeIcon />,
+    },
+    {
+      title: 'partialParticipationEdge',
+      type: 'constraint',
+      description: 'Partial Participation',
+      icon: <PartialParticipationEdgeIcon />,
+    },
+    {
+      title: 'totalParticipationEdge',
+      type: 'constraint',
+      description: 'Total Participation',
+      icon: <TotalParticipationEdgeIcon />,
     },
 
   ];
