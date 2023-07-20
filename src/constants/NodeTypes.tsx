@@ -1,5 +1,6 @@
 import AggregateEntityNodeIcon from "../icons/AggregateEntityNodeIcon";
 import CompositeAttributeNodeIcon from "../icons/CompositeAttributeNodeIcon";
+import DashedLineEdgeIcon from "../icons/DashedLineEdgeIcon";
 import DerivedAttributeNodeIcon from "../icons/DerivedAttributeNodeIcon";
 import HierarchyNodeIcon from "../icons/HierarchyNodeIcon";
 import KeyEdgeIcon from "../icons/KeyEdgeIcon";
@@ -75,12 +76,7 @@ const NodeTypes = [
       description: 'Derived',
       icon: <DerivedAttributeNodeIcon />,
     },
-    {
-      title: 'hierarchy',
-      type: 'miscallaneous',
-      description: 'ISA Hierarchy',
-      icon: <HierarchyNodeIcon />,
-    },
+    
     {
       title: 'keyEdge',
       type: 'constraint',
@@ -104,6 +100,18 @@ const NodeTypes = [
       type: 'constraint',
       description: 'Total Participation',
       icon: <TotalParticipationEdgeIcon />,
+    },
+    {
+      title: 'hierarchy',
+      type: 'miscallaneous',
+      description: 'ISA Hierarchy',
+      icon: <HierarchyNodeIcon />,
+    },
+    {
+      title: 'dashedLineEdge',
+      type: 'constraint',
+      description: 'Superclass Connector',
+      icon: <DashedLineEdgeIcon />,
     },
 
   ];
