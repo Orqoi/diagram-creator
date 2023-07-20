@@ -23,6 +23,7 @@ import CompositeAttributeNode from '../components/nodes/attributes/CompositeAttr
 import MultiValuedAttributeNode from '../components/nodes/attributes/MultiValuedAttributeNode';
 import PrimaryAttributeNode from '../components/nodes/attributes/PrimaryAttributeNode';
 import DerivedAttributeNode from '../components/nodes/attributes/DerivedAttributeNode';
+import SettingsDrawer from '../components/SettingsDrawer';
 
 function DiagramCreator() {
     const nodeTypes = useMemo(() => ({ 
@@ -97,9 +98,7 @@ function DiagramCreator() {
           >
             <Controls position="bottom-right" />
           </ReactFlow>
-          <Stack width={500} border='1px solid lightgray'>
-            Hello
-          </Stack>
+          <SettingsDrawer />
 
         </Stack>
         
