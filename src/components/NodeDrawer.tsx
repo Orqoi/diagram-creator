@@ -25,7 +25,7 @@ export default function NodeDrawer({ setNodes, nodes }) {
             maxHeight='80%'
             sx={{paddingLeft: 1, paddingRight: 1, paddingBottom: 1, overflowY:'auto'}}
             >
-            {NodeTypes.map((nodeType, idx) => <NodeCard key={idx} type={nodeType.title} title={nodeType.description} setNodes={setNodes} nodes={nodes}/>)}
+            {NodeTypes.map((nodeType, idx) => <NodeCard key={idx} icon={nodeType.icon} type={nodeType.title} title={nodeType.description} setNodes={setNodes} nodes={nodes}/>)}
           </Grid>
     </Stack>
   );
