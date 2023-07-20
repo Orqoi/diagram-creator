@@ -6,12 +6,14 @@ import ReactFlow, {
   useNodesState,
   useEdgesState,
   addEdge,
-  useStoreApi
+  useStoreApi,
+  MarkerType,
+  BaseEdge
 } from 'reactflow';
 
 import NodeDrawer from '../components/NodeDrawer';
 import WeakEntityNode from '../components/nodes/entities/WeakEntityNode';
-import CustomEdge from '../components/edges/CustomEdge';
+import CustomEdge from '../components/edges/KeyEdge';
 import RegularEntityNode from '../components/nodes/entities/RegularEntityNode';
 import AggregateEntityNode from '../components/nodes/entities/AggregateEntityNode';
 import RegularRelationNode from '../components/nodes/relations/RegularRelationNode';
@@ -24,6 +26,12 @@ import MultiValuedAttributeNode from '../components/nodes/attributes/MultiValued
 import PrimaryAttributeNode from '../components/nodes/attributes/PrimaryAttributeNode';
 import DerivedAttributeNode from '../components/nodes/attributes/DerivedAttributeNode';
 import SettingsDrawer from '../components/SettingsDrawer';
+import StraightLineEdge from '../components/edges/PartialParticipationEdge';
+import DashedLineEdge from '../components/edges/RegularEdge';
+import TotalParticipationEdge from '../components/edges/TotalParticipationEdge';
+import KeyEdge from '../components/edges/KeyEdge';
+import PartialParticipationEdge from '../components/edges/PartialParticipationEdge';
+import RegularEdge from '../components/edges/RegularEdge';
 
 function DiagramCreator() {
     const nodeTypes = useMemo(() => ({ 
@@ -39,9 +47,6 @@ function DiagramCreator() {
       primaryAttribute: PrimaryAttributeNode,
       derivedAttribute: DerivedAttributeNode }), []);
 
-    const initialNodes = [
-
-    ];
     const reactFlowInstance = useReactFlow()
     const store = useStoreApi().getState()
    
@@ -69,11 +74,18 @@ function DiagramCreator() {
 
 
     const edgeTypes = useMemo(() => ({
-        customedge: CustomEdge,
+        keyEdge: KeyEdge,
+        partialParticipationEdge: PartialParticipationEdge,
+        regularEdge: RegularEdge,
+        totalParticipationEdge: TotalParticipationEdge
     }), []);
     const proOptions = { hideAttribution: true };
 
-    const initialEdges = [];
+    const initialNodes = [
+      { id: '1', position: { x: 0, y: 0 }, data: { label: '1' } },
+      { id: '2', position: { x: 0, y: 100 }, data: { label: '2' } },
+    ];
+    const initialEdges = [{ id: 'e1-2', source: '1', target: '2', type: 'keyEdge' }];
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const onConnect = useCallback((params: any) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
