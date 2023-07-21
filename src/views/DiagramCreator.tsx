@@ -7,6 +7,7 @@ import ReactFlow, {
   useEdgesState,
   addEdge,
   useStoreApi,
+  MarkerType,
 } from 'reactflow';
 
 import NodeDrawer from '../components/NodeDrawer';

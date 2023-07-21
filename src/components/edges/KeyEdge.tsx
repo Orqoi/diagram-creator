@@ -1,18 +1,30 @@
-import React from 'react';
-import { BaseEdge, EdgeProps } from 'reactflow';
+import React, { useCallback } from 'react';
+import { BaseEdge, EdgeProps, useStore, getStraightPath } from 'reactflow';
+import { getEdgeParams } from './utils';
 
 export default function KeyEdge({
   id,
-  sourceX,
-  sourceY,
-  targetX,
-  targetY,
-  sourcePosition,
-  targetPosition,
+  source,
+  target,
   markerEnd,
   style = {},
 }: EdgeProps) {
-  const edgePath = `M ${sourceX},${sourceY} L ${targetX},${targetY}`;
+  // Use the getEdgeParams function to calculate the edge parameters
+  const sourceNode = useStore(useCallback((store) => store.nodeInternals.get(source), [source]));
+  const targetNode = useStore(useCallback((store) => store.nodeInternals.get(target), [target]));
+
+  if (!sourceNode || !targetNode) {
+    return null;
+  }
+  const { sx, sy, tx, ty } = getEdgeParams(sourceNode, targetNode);
+
+  // Use the calculated sx, sy, tx, and ty to create the edge path
+  const [edgePath] = getStraightPath({
+    sourceX: sx,
+    sourceY: sy,
+    targetX: tx,
+    targetY: ty,
+  });
 
   return (
     <>
@@ -26,7 +38,7 @@ export default function KeyEdge({
         markerHeight="8" // Set the marker's height (affects the size)
         orient="auto"
       >
-        <path d="M 0,0 L 10,5 L 0,10 Z" fill={style.stroke} /> // Arrowhead path
+        <path d="M 0,0 L 10,5 L 0,10 Z" fill={style.stroke} /> {/* Arrowhead path */}
       </marker>
       <BaseEdge path={edgePath} markerEnd={`url(#arrowhead-${id})`} style={style} />
     </>
