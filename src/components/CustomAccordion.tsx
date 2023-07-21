@@ -4,7 +4,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import NodeCard from './NodeCard';
 
-function CustomAccordion({ title, data, getCenter, nodes, setNodes, ...props}) {
+function CustomAccordion({ title, data, getCenter, nodes, setNodes, setConnectionEdge = undefined, connectionEdge = undefined, ...props}) {
     const [expanded, setExpanded] = useState(false)
     if (data.length === 0) {
         return null
@@ -21,7 +21,7 @@ function CustomAccordion({ title, data, getCenter, nodes, setNodes, ...props}) {
                 spacing={1}
             >
                 
-                {data.map((nodeType, idx) => <NodeCard key={idx} getCenter={getCenter} icon={nodeType.icon} type={nodeType.title} title={nodeType.description} setNodes={setNodes} nodes={nodes}/>)}
+                {data.map((nodeType, idx) => <NodeCard key={idx} setConnectionEdge={setConnectionEdge} connectionEdge={connectionEdge} getCenter={getCenter} icon={nodeType.icon} type={nodeType.title} title={nodeType.description} setNodes={setNodes} nodes={nodes}/>)}
             </Grid>
             : <></>
             }

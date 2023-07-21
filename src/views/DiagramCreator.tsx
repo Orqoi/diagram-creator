@@ -1,5 +1,5 @@
 import { Stack, Button } from '@mui/material';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import ReactFlow, {
   Controls,
   useReactFlow,
@@ -82,16 +82,19 @@ function DiagramCreator() {
       { id: '1', position: { x: 0, y: 0 }, data: { label: '1' } },
       { id: '2', position: { x: 0, y: 100 }, data: { label: '2' } },
     ];
-    const initialEdges = [{ id: 'e1-2', source: '1', target: '2', type: 'dashedLineEdge' }];
+    const initialEdges = [];
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-  const onConnect = useCallback((params: any) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
+  const [connectionEdge, setConnectionEdge] = useState('regularEdge')
+  const onConnect = useCallback((params: any) => setEdges((eds) => {
+    return addEdge({...params, type: connectionEdge}, eds)
+  }), [connectionEdge, setEdges]);
   return (
     <Stack height="100%" width="100%">
         <DiagramAppBar/>
       
         <Stack direction="row" height="100%" width="100%">
-          <NodeDrawer nodes={nodes} setNodes={setNodes} getCenter={getCenter} />
+          <NodeDrawer nodes={nodes} setNodes={setNodes} getCenter={getCenter} connectionEdge={connectionEdge} setConnectionEdge={setConnectionEdge} />
 
           <ReactFlow
             nodeTypes={nodeTypes}

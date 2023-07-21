@@ -4,7 +4,7 @@ import NodeTypes from '../constants/NodeTypes';
 import CustomAccordion from './CustomAccordion';
 import { useState } from 'react'
 
-export default function NodeDrawer({ setNodes, nodes, getCenter }) {
+export default function NodeDrawer({ setNodes, nodes, getCenter, connectionEdge, setConnectionEdge }) {
   const [data, setData] = useState(NodeTypes)
 
   return (
@@ -23,10 +23,11 @@ export default function NodeDrawer({ setNodes, nodes, getCenter }) {
             }}/>
       </Box>
       <Stack direction='column' alignItems='center' width='100%' maxHeight='70vh' sx={{paddingLeft: 1, paddingRight: 1, paddingBottom: 1, overflowY:'auto'}}>
+        <CustomAccordion title="Constraints" data={data.filter(item => item.type === 'constraint')} connectionEdge={connectionEdge} setConnectionEdge={setConnectionEdge} getCenter={getCenter} nodes={nodes} setNodes={setNodes}/>
         <CustomAccordion title="Entities" data={data.filter(item => item.type === 'entity')} getCenter={getCenter} nodes={nodes} setNodes={setNodes}/>
         <CustomAccordion title="Relations" data={data.filter(item => item.type === 'relation')} getCenter={getCenter} nodes={nodes} setNodes={setNodes}/>
-        <CustomAccordion title="Attributes" data={data.filter(item => item.type === 'attribute')} getCenter={getCenter} nodes={nodes} setNodes={setNodes}/>
-        <CustomAccordion title="Constraints and Miscallaneous" data={data.filter(item => item.type === 'miscallaneous' || item.type === 'constraint')} getCenter={getCenter} nodes={nodes} setNodes={setNodes}/>
+        <CustomAccordion title="Attributes and Miscallaneous" data={data.filter(item => item.type === 'miscallaneous' || item.type === 'attribute')} getCenter={getCenter} nodes={nodes} setNodes={setNodes}/>
+        
       </Stack>
       
     </Stack>
