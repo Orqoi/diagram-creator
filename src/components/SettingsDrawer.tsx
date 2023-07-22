@@ -15,12 +15,6 @@ function SettingsDrawer() {
       <Button sx={{ marginBottom: "1rem" }} variant="contained">
         Convert to SQL
       </Button>
-      <Button sx={{ marginBottom: "1rem" }} variant="contained">
-        Delete
-      </Button>
-      <Button sx={{ marginBottom: "1rem" }} variant="contained">
-        Save Draft
-      </Button>
     </Stack>
   );
 }

@@ -128,8 +128,15 @@ function getDiamondIntersection(intersectionNode, targetNode) {
   const dx = x2 - x1;
   const dy = y2 - y1;
 
-  const a = w;
-  const b = h - 2; // where is this additional 2 coming from?
+  // TODO: Fix sizing
+
+  const a = w - 2;
+  const b = h - 3;
+
+  const xMin = intersectionNodePosition.x
+  const xMax = xMin + intersectionNodeWidth
+  const yMin = intersectionNodePosition.y
+  const yMax = yMin + intersectionNodeHeight
 
   // Define the parameters of the line
   const m = (dx !== 0) ? dy / dx : 1; // Avoid division by zero
@@ -139,7 +146,8 @@ function getDiamondIntersection(intersectionNode, targetNode) {
   const intersectionPoints : any = [];
 
   // Calculate x +ve, y +ve
-  let s1 = ((a * b) + (a * y2) - (a * c) + (b * x2)) / (a * m + b);
+  if (dx !== 0) {
+    let s1 = ((a * b) + (a * y2) - (a * c) + (b * x2)) / (a * m + b);
   let t1 = m * s1 + c;
   const allowance = 0.0000001
   if (Math.abs((s1 - x2) / a) + Math.abs((t1 - y2) / b) <= 1 + allowance) {
@@ -164,7 +172,11 @@ function getDiamondIntersection(intersectionNode, targetNode) {
   let s4 = ((a * b) - (a * y2) + (a * c) - (b * x2)) / (-a * m - b);
   let t4 = m * s4 + c;
   if (Math.abs((s4 - x2) / a) + Math.abs((t4 - y2) / b) <= 1 + allowance) {
-    intersectionPoints.push({ x: s4, y: t4 }, "MOTHERLESS");
+    intersectionPoints.push({ x: s4, y: t4 });
+  }
+  } else {
+    intersectionPoints.push({x: x2, y: yMin })
+    intersectionPoints.push({x: x2, y: yMax })
   }
 
   return findNearestCoordinate(intersectionPoints, {x: x1, y: y1});
@@ -197,7 +209,6 @@ function getEdgePosition(node, intersectionPoint) {
 // returns the parameters (sx, sy, tx, ty, sourcePos, targetPos) you need to create an edge
 export function getEdgeParams(source, target) {
   const sourceIntersectionPoint = getDiamondIntersection(source, target);
-  console.log("TARGET")
   const targetIntersectionPoint = getDiamondIntersection(target, source);
 
   const sourcePos = getEdgePosition(source, sourceIntersectionPoint);

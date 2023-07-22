@@ -56,7 +56,7 @@ function DownloadButton() {
       className="download-btn"
       onClick={onClick}
     >
-      Download Image
+      Download
     </Button>
   );
 }

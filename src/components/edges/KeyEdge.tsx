@@ -21,7 +21,6 @@ export default function KeyEdge({
     return null;
   }
   const { sx, sy, tx, ty } = getEdgeParams(sourceNode, targetNode);
-  console.log({ sx, sy, tx, ty });
 
   // Use the calculated sx, sy, tx, and ty to create the edge path
   const [edgePath] = getStraightPath({

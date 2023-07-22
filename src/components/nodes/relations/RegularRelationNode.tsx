@@ -57,7 +57,7 @@ function RegularRelationNode({ id }) {
       <foreignObject
         x={textX}
         y={textY}
-        width={inputWidth + 2}
+        width={inputWidth}
         height={foreignObjectHeight}
       >
         <Input

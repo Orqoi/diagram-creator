@@ -49,29 +49,27 @@ function DiagramCreator() {
   );
 
   const reactFlowInstance = useReactFlow();
-  const store = useStoreApi().getState();
+  const store = useStoreApi();
 
-  const getCenter = () => {
-    // const {height, width} = store
-    const { x, y } = reactFlowInstance.getViewport();
-    // console.log({x, y})
-    // console.log(store)
-    // const center = {
-    //   x: -x + width / 2,
-    //   y: -y + height / 2
-    // }
-    return reactFlowInstance.project({ x, y });
-  };
-  // useEffect(() => {
-  //   if (diagramRef.current) {
-  //     // Access getBoundingClientRect() method only when diagramRef.current is not null
-  //     const { height, width } = store
-  //     const {x, y} = diagramRef.current.getBoundingClientRect()
-  //     const centerX = x + (width / 2)
-  //     const centerY = y + (height / 2)
-  //     setCenter(reactFlowInstance.project({x: centerX / 2, y: centerY / 2}))
-  //   }
-  // }, [diagramRef.current, reactFlowInstance]);
+  const getCenter = useCallback(() => {
+    // Get the basic info about the viewport
+    const {
+      height,
+      width,
+      transform: [transformX, transformY, zoomLevel],
+    } = store.getState();
+    const zoomMultiplier = 1 / zoomLevel;
+
+    // Figure out the center of the current viewport
+    const centerX = -transformX * zoomMultiplier + (width * zoomMultiplier) / 2;
+    const centerY =
+      -transformY * zoomMultiplier + (height * zoomMultiplier) / 2;
+
+    return {
+      x: centerX,
+      y: centerY,
+    };
+  }, [store]);
 
   const edgeTypes = useMemo(
     () => ({
@@ -87,14 +85,14 @@ function DiagramCreator() {
   const initialNodes = [
     {
       id: "1",
-      type: "regularRelation",
+      type: "compositeAttribute",
       position: { x: 600, y: 0 },
       data: { label: "1" },
     },
     {
       id: "2",
-      type: "regularRelation",
-      position: { x: 0, y: 400 },
+      type: "compositeAttribute",
+      position: { x: 600, y: 400 },
       data: { label: "2" },
     },
   ];
@@ -117,8 +115,6 @@ function DiagramCreator() {
     // call API to save current representation, with debounce interval
     localStorage.setItem("nodes", JSON.stringify(nodes));
     localStorage.setItem("edges", JSON.stringify(edges));
-    console.log(nodes);
-    console.log(edges);
   }, [nodes, edges]);
 
   const [connectionEdge, setConnectionEdge] = useState("regularEdge");
