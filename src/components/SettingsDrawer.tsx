@@ -1,5 +1,6 @@
 import React from "react";
 import { Stack, Button } from "@mui/material";
+import DownloadButton from "./DownloadButton";
 
 function SettingsDrawer() {
   return (
@@ -10,9 +11,7 @@ function SettingsDrawer() {
       border="1px solid lightgray"
       justifyContent={"flex-end"}
     >
-      <Button sx={{ marginBottom: "1rem" }} variant="contained">
-        Save as Image
-      </Button>
+      <DownloadButton />
       <Button sx={{ marginBottom: "1rem" }} variant="contained">
         Convert to SQL
       </Button>

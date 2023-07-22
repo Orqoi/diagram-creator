@@ -1,15 +1,29 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Handle, Position, useReactFlow } from "reactflow";
+import { Handle, Position, useReactFlow, useStore } from "reactflow";
 import DynamicInput from "../../DynamicInput";
 import { IconButton, Stack } from "@mui/material";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import EditIcon from "@mui/icons-material/Edit";
+import "./temp.css";
+
+const connectionNodeIdSelector = (state) => state.connectionNodeId;
+const sourceStyle = { zIndex: 1 };
 
 const CompositeAttributeNode = ({ id, selected }) => {
+  const connectionNodeId = useStore(connectionNodeIdSelector);
+
+  const isConnecting = !!connectionNodeId;
+  const isTarget = connectionNodeId && connectionNodeId !== id;
   const reactFlowInstance = useReactFlow();
   const nodes = reactFlowInstance.getNodes();
-  const onDelete = () =>
+  const edges = reactFlowInstance.getEdges();
+  const onDelete = () => {
     reactFlowInstance.setNodes(nodes.filter((node) => node.id !== id));
+    reactFlowInstance.setEdges(
+      edges.filter((edge) => edge.source !== id && edge.target !== id)
+    );
+  };
+
   const [disabled, setDisabled] = useState(true);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -39,17 +53,16 @@ const CompositeAttributeNode = ({ id, selected }) => {
         position: "relative", // Add position relative to contain the button
       }}
     >
-      <Handle
-        type="source"
-        position={Position.Top}
-        style={{ top: 0, opacity: 0 }}
-      />
+      <Handle className="customHandle" position={Position.Left} type="target" />
       <DynamicInput inputRef={ref} disabled={disabled} />
-      <Handle
-        type="target"
-        position={Position.Bottom}
-        style={{ top: 0, opacity: 0 }}
-      />
+      {!isConnecting && (
+        <Handle
+          className="customHandle"
+          position={Position.Right}
+          type="source"
+          style={sourceStyle}
+        />
+      )}
       {/* Conditionally render the button and position it on the right */}
       {selected && (
         <Stack

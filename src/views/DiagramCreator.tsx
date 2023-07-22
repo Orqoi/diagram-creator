@@ -98,14 +98,19 @@ function DiagramCreator() {
     // call API to save current representation, with debounce interval
     localStorage.setItem("nodes", JSON.stringify(nodes));
     localStorage.setItem("edges", JSON.stringify(edges));
+    console.log(nodes);
+    console.log(edges);
   }, [nodes, edges]);
 
   const [connectionEdge, setConnectionEdge] = useState("regularEdge");
   const onConnect = useCallback(
-    (params: any) =>
-      setEdges((eds) => {
-        return addEdge({ ...params, type: connectionEdge }, eds);
-      }),
+    (params: any) => {
+      if (params.source !== params.target) {
+        setEdges((eds) => {
+          return addEdge({ ...params, type: connectionEdge }, eds);
+        });
+      }
+    },
     [connectionEdge, setEdges]
   );
   return (
