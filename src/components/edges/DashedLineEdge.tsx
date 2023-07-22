@@ -1,5 +1,5 @@
-import React from 'react';
-import { BaseEdge, EdgeProps } from 'reactflow';
+import React from "react";
+import { BaseEdge, EdgeProps } from "reactflow";
 
 export default function DashedLineEdge({
   id,
@@ -12,7 +12,7 @@ export default function DashedLineEdge({
   style = {},
   markerEnd,
 }: EdgeProps) {
-  const dashedLinePattern = '5,5'; // Customize the pattern for the dashed line here
+  const dashedLinePattern = "5,5"; // Customize the pattern for the dashed line here
   const edgePath = `M ${sourceX},${sourceY} L ${targetX},${targetY}`;
 
   return (

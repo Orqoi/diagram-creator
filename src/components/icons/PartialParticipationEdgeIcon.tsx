@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const PartialParticipationEdgeIcon = ({ width = 70, height = 35 }) => {
   return (

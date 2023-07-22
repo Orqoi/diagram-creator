@@ -1,6 +1,6 @@
-import React, { useCallback } from 'react';
-import { BaseEdge, EdgeProps, useStore, getStraightPath } from 'reactflow';
-import { getEdgeParams } from './utils';
+import React, { useCallback } from "react";
+import { BaseEdge, EdgeProps, useStore, getStraightPath } from "reactflow";
+import { getEdgeParams } from "./utils";
 
 export default function TotalParticipationEdge({
   id,
@@ -12,8 +12,12 @@ export default function TotalParticipationEdge({
   const doubleLineWidth = 1; // Set the width of the double line
 
   // Use the getEdgeParams function to calculate the edge parameters
-  const sourceNode = useStore(useCallback((store) => store.nodeInternals.get(source), [source]));
-  const targetNode = useStore(useCallback((store) => store.nodeInternals.get(target), [target]));
+  const sourceNode = useStore(
+    useCallback((store) => store.nodeInternals.get(source), [source]),
+  );
+  const targetNode = useStore(
+    useCallback((store) => store.nodeInternals.get(target), [target]),
+  );
 
   if (!sourceNode || !targetNode) {
     return null;
@@ -46,21 +50,29 @@ export default function TotalParticipationEdge({
   // Define the custom SVG path for the arrowhead marker
   const arrowheadPath = `M 0,0 L 8,4 L 0,8 L 2,4 Z`; // Example arrowhead path, adjust as needed
 
+  // Override the default styles for BaseEdge to set the stroke color to black
+  const solidBlackStyle = { ...style, stroke: "black" };
+
   return (
     <>
-      <BaseEdge path={edgePath} style={style} />
+      <BaseEdge path={edgePath} style={solidBlackStyle} />
       <marker
         id={`arrowhead-${id}`} // Use a unique ID for the marker
         viewBox="0 0 8 8" // Adjust the viewBox as needed for the arrowhead size
         refX="5" // Set the X coordinate for the arrowhead's tip
-        refY={targetPos === 'top' ? 4 : 3} // Set the Y coordinate for the arrowhead's center
+        refY={3} // Set the Y coordinate for the arrowhead's center
         markerWidth="8" // Set the marker's width (affects the size)
         markerHeight="8" // Set the marker's height (affects the size)
         orient="auto"
       >
-        <path d={arrowheadPath} fill={style.stroke} /> {/* Use the same stroke color as the edge */}
+        <path d={arrowheadPath} fill="black" />{" "}
+        {/* Set the arrowhead fill color to black */}
       </marker>
-      <BaseEdge path={edgePath} markerEnd={`url(#arrowhead-${id})`} style={style} />
+      <BaseEdge
+        path={edgePath}
+        markerEnd={`url(#arrowhead-${id})`}
+        style={solidBlackStyle}
+      />
     </>
   );
 }

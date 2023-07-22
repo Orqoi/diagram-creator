@@ -1,27 +1,31 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import BedtimeIcon from '@mui/icons-material/Bedtime';
-import DiamondIcon from '@mui/icons-material/Diamond';
-import { Switch } from '@mui/material';
-import MaterialUISwitch from './MaterialUISwitch';
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
+import BedtimeIcon from "@mui/icons-material/Bedtime";
+import DiamondIcon from "@mui/icons-material/Diamond";
+import { Switch } from "@mui/material";
+import MaterialUISwitch from "./MaterialUISwitch";
 
-const pages = ['Home', /*'Dashboard',*/ 'Documentation'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = ["Home", /*'Dashboard',*/ "Documentation"];
+const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function TopBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
+    null,
+  );
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+    null,
+  );
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -42,7 +46,7 @@ function TopBar() {
     <AppBar position="static">
       <Container maxWidth={false}>
         <Toolbar disableGutters>
-          <DiamondIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <DiamondIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -50,17 +54,17 @@ function TopBar() {
             href="/"
             sx={{
               mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
               fontWeight: 700,
-              color: 'inherit',
-              textDecoration: 'none',
+              color: "inherit",
+              textDecoration: "none",
             }}
           >
             PRISMATICA
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -75,19 +79,19 @@ function TopBar() {
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: "bottom",
+                horizontal: "left",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
+                vertical: "top",
+                horizontal: "left",
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                color: 'inherit',
-                display: { xs: 'block', md: 'none' },
+                color: "inherit",
+                display: { xs: "block", md: "none" },
               }}
             >
               {pages.map((page) => (
@@ -97,7 +101,7 @@ function TopBar() {
               ))}
             </Menu>
           </Box>
-          <DiamondIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <DiamondIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -105,29 +109,35 @@ function TopBar() {
             href=""
             sx={{
               mr: 2,
-              display: { xs: 'flex', md: 'none' },
+              display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: 'monospace',
+              fontFamily: "monospace",
               fontWeight: 700,
-              color: 'inherit',
-              textDecoration: 'none',
+              color: "inherit",
+              textDecoration: "none",
             }}
           >
             PRISMATICA
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'inherit', display: 'block' }}
+                sx={{ my: 2, color: "inherit", display: "block" }}
               >
                 {page}
               </Button>
             ))}
           </Box>
-          <Box sx={{ display: 'flex', flexGrow: 0, justifyContent: 'center', alignItems: 'center'   }} >
-            
+          <Box
+            sx={{
+              display: "flex",
+              flexGrow: 0,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <Tooltip title="Toggle Dark Mode">
               <React.Fragment>
                 <MaterialUISwitch sx={{ m: 1 }} defaultChecked />
@@ -142,17 +152,17 @@ function TopBar() {
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: '45px' }}
+              sx={{ mt: "45px" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}

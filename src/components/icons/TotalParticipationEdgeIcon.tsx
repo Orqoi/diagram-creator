@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const TotalParticipationEdgeIcon = ({ width = 70, height = 35 }) => {
   const arrowheadPath = "M 0,1 L 7,5 L 0,9 Z"; // Narrower arrowhead base

@@ -1,6 +1,6 @@
-import React, { useCallback } from 'react';
-import { BaseEdge, EdgeProps, useStore, getStraightPath } from 'reactflow';
-import { getEdgeParams } from './utils';
+import React, { useCallback } from "react";
+import { BaseEdge, EdgeProps, useStore, getStraightPath } from "reactflow";
+import { getEdgeParams } from "./utils";
 
 export default function KeyEdge({
   id,
@@ -10,8 +10,12 @@ export default function KeyEdge({
   style = {},
 }: EdgeProps) {
   // Use the getEdgeParams function to calculate the edge parameters
-  const sourceNode = useStore(useCallback((store) => store.nodeInternals.get(source), [source]));
-  const targetNode = useStore(useCallback((store) => store.nodeInternals.get(target), [target]));
+  const sourceNode = useStore(
+    useCallback((store) => store.nodeInternals.get(source), [source]),
+  );
+  const targetNode = useStore(
+    useCallback((store) => store.nodeInternals.get(target), [target]),
+  );
 
   if (!sourceNode || !targetNode) {
     return null;
@@ -26,9 +30,12 @@ export default function KeyEdge({
     targetY: ty,
   });
 
+  // Override the default styles for BaseEdge to set the stroke color to black
+  const solidBlackStyle = { ...style, stroke: "black" };
+
   return (
     <>
-      <BaseEdge path={edgePath} style={style} />
+      <BaseEdge path={edgePath} style={solidBlackStyle} />
       <marker
         id={`arrowhead-${id}`} // Use a unique ID for the marker
         viewBox="0 0 10 10" // Adjust the viewBox as needed for the arrowhead size
@@ -38,9 +45,14 @@ export default function KeyEdge({
         markerHeight="8" // Set the marker's height (affects the size)
         orient="auto"
       >
-        <path d="M 0,0 L 10,5 L 0,10 Z" fill={style.stroke} /> {/* Arrowhead path */}
+        <path d="M 0,0 L 10,5 L 0,10 Z" fill={style.stroke} />{" "}
+        {/* Arrowhead path */}
       </marker>
-      <BaseEdge path={edgePath} markerEnd={`url(#arrowhead-${id})`} style={style} />
+      <BaseEdge
+        path={edgePath}
+        markerEnd={`url(#arrowhead-${id})`}
+        style={solidBlackStyle}
+      />
     </>
   );
 }

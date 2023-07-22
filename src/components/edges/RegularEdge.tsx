@@ -1,6 +1,6 @@
-import React, { useCallback } from 'react';
-import { BaseEdge, EdgeProps, useStore } from 'reactflow';
-import { getEdgeParams } from './utils';
+import React, { useCallback } from "react";
+import { BaseEdge, EdgeProps, useStore } from "reactflow";
+import { getEdgeParams } from "./utils";
 
 export default function RegularEdge({
   id,
@@ -10,8 +10,12 @@ export default function RegularEdge({
   style = {},
 }: EdgeProps) {
   // Use the getEdgeParams function to calculate the edge parameters
-  const sourceNode = useStore(useCallback((store) => store.nodeInternals.get(source), [source]));
-  const targetNode = useStore(useCallback((store) => store.nodeInternals.get(target), [target]));
+  const sourceNode = useStore(
+    useCallback((store) => store.nodeInternals.get(source), [source]),
+  );
+  const targetNode = useStore(
+    useCallback((store) => store.nodeInternals.get(target), [target]),
+  );
 
   if (!sourceNode || !targetNode) {
     return null;
@@ -22,7 +26,10 @@ export default function RegularEdge({
 
   const edgePath = `M ${sx},${sy} L ${tx},${ty}`;
 
+  // Override the default styles for BaseEdge to set the stroke color to black
+  const solidBlackStyle = { ...style, stroke: "black" };
+
   return (
-    <BaseEdge path={edgePath} markerEnd={markerEnd} style={style} />
+    <BaseEdge path={edgePath} markerEnd={markerEnd} style={solidBlackStyle} />
   );
 }

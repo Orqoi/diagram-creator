@@ -1,6 +1,6 @@
-import React, { useCallback } from 'react';
-import { BaseEdge, EdgeProps, useStore } from 'reactflow';
-import { getEdgeParams } from './utils';
+import React, { useCallback } from "react";
+import { BaseEdge, EdgeProps, useStore } from "reactflow";
+import { getEdgeParams } from "./utils";
 
 export default function PartialParticipationEdge({
   id,
@@ -12,8 +12,12 @@ export default function PartialParticipationEdge({
   const doubleLineWidth = 1; // Set the width of the double line
 
   // Use the getEdgeParams function to calculate the edge parameters
-  const sourceNode = useStore(useCallback((store) => store.nodeInternals.get(source), [source]));
-  const targetNode = useStore(useCallback((store) => store.nodeInternals.get(target), [target]));
+  const sourceNode = useStore(
+    useCallback((store) => store.nodeInternals.get(source), [source]),
+  );
+  const targetNode = useStore(
+    useCallback((store) => store.nodeInternals.get(target), [target]),
+  );
 
   if (!sourceNode || !targetNode) {
     return null;
@@ -44,10 +48,13 @@ export default function PartialParticipationEdge({
 
   const edgePath = `M ${line1X1},${line1Y1} L ${line1X2},${line1Y2} M ${line2X1},${line2Y1} L ${line2X2},${line2Y2}`;
 
+  // Override the default styles for BaseEdge to set the stroke color to black
+  const solidBlackStyle = { ...style, stroke: "black" };
+
   return (
     <>
-      <BaseEdge path={edgePath} style={style} />
-      <BaseEdge path={edgePath} style={style} />
+      <BaseEdge path={edgePath} style={solidBlackStyle} />
+      <BaseEdge path={edgePath} style={solidBlackStyle} />
     </>
   );
 }

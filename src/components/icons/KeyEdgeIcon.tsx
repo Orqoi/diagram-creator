@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const KeyEdgeIcon = ({ width = 70, height = 35 }) => {
   const arrowheadPath = "M 0,0 L 10,5 L 0,10 Z"; // Thin arrowhead path
@@ -23,7 +23,15 @@ const KeyEdgeIcon = ({ width = 70, height = 35 }) => {
       >
         <path d={arrowheadPath} fill="#000" />
       </marker>
-      <line x1="50" y1="17.5" x2="70" y2="17.5" stroke="#000" strokeWidth="2" markerEnd="url(#arrowhead-icon)" />
+      <line
+        x1="50"
+        y1="17.5"
+        x2="70"
+        y2="17.5"
+        stroke="#000"
+        strokeWidth="2"
+        markerEnd="url(#arrowhead-icon)"
+      />
     </svg>
   );
 };

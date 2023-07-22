@@ -1,16 +1,16 @@
-import React from 'react';
+import React from "react";
 
 const RegularEntityNodeIcon = () => {
   return (
     <div
       style={{
-        border: '1px solid black',
-        background: '#fff',
+        border: "1px solid black",
+        background: "#fff",
         minHeight: 35, // Adjust height and width as per your icon size preference
         minWidth: 70,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       {/* Add any design elements for your icon here */}
