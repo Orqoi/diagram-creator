@@ -4,7 +4,7 @@ import DynamicInput from "../../DynamicInput";
 import { IconButton, Stack } from "@mui/material";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import EditIcon from "@mui/icons-material/Edit";
-import "./temp.css";
+import "../temp.css";
 
 const connectionNodeIdSelector = (state) => state.connectionNodeId;
 const sourceStyle = { zIndex: 1 };

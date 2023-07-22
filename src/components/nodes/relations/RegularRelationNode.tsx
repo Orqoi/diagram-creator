@@ -1,12 +1,22 @@
 import { makeStyles } from "@mui/styles";
 import React, { useEffect, useState } from "react";
 import { Input } from "@mui/material";
+import { Handle, Position, useReactFlow, useStore } from "reactflow";
+
+import "../temp.css";
 
 function convertRemToPixels(rem) {
   return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
 }
 
-function RegularRelationNode() {
+const connectionNodeIdSelector = (state) => state.connectionNodeId;
+const sourceStyle = { zIndex: 1 };
+
+function RegularRelationNode({ id }) {
+  const connectionNodeId = useStore(connectionNodeIdSelector);
+  const isConnecting = !!connectionNodeId;
+  const isTarget = connectionNodeId && connectionNodeId !== id;
+  const reactFlowInstance = useReactFlow();
   const FONT_SIZE = convertRemToPixels(1);
   const DEFAULT_INPUT_WIDTH = 100;
 
@@ -43,6 +53,7 @@ function RegularRelationNode() {
   return (
     <svg className={classes.diamond}>
       <polygon points={points} fill="white" stroke="black" strokeWidth="1" />
+
       <foreignObject
         x={textX}
         y={textY}
@@ -60,6 +71,20 @@ function RegularRelationNode() {
           style={{ position: "relative", zIndex: 2 }}
         />
       </foreignObject>
+      <Handle
+        className="customHandle"
+        position={Position.Right}
+        type="target"
+        style={sourceStyle}
+      />
+      {!isConnecting && (
+        <Handle
+          className="customHandle"
+          position={Position.Right}
+          type="source"
+          style={sourceStyle}
+        />
+      )}
     </svg>
   );
 }

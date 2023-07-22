@@ -84,14 +84,33 @@ function DiagramCreator() {
     []
   );
   const proOptions = { hideAttribution: true };
+  const initialNodes = [
+    {
+      id: "1",
+      type: "regularRelation",
+      position: { x: 600, y: 0 },
+      data: { label: "1" },
+    },
+    {
+      id: "2",
+      type: "regularRelation",
+      position: { x: 0, y: 400 },
+      data: { label: "2" },
+    },
+  ];
+  const initialEdges = [
+    { id: "e123", source: "1", target: "2", type: "keyEdge" },
+  ];
 
-  const initialNodes = localStorage.getItem("nodes") ?? "[]";
-  const initialEdges = localStorage.getItem("edges") ?? "[]";
+  // const initialNodes = localStorage.getItem("nodes") ?? "[]";
+  // const initialEdges = localStorage.getItem("edges") ?? "[]";
   const [nodes, setNodes, onNodesChange] = useNodesState(
-    JSON.parse(initialNodes)
+    initialNodes
+    // JSON.parse(initialNodes)
   );
   const [edges, setEdges, onEdgesChange] = useEdgesState(
-    JSON.parse(initialEdges)
+    initialEdges
+    // JSON.parse(initialEdges)
   );
 
   useEffect(() => {

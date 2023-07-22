@@ -11,16 +11,17 @@ export default function KeyEdge({
 }: EdgeProps) {
   // Use the getEdgeParams function to calculate the edge parameters
   const sourceNode = useStore(
-    useCallback((store) => store.nodeInternals.get(source), [source]),
+    useCallback((store) => store.nodeInternals.get(source), [source])
   );
   const targetNode = useStore(
-    useCallback((store) => store.nodeInternals.get(target), [target]),
+    useCallback((store) => store.nodeInternals.get(target), [target])
   );
 
   if (!sourceNode || !targetNode) {
     return null;
   }
   const { sx, sy, tx, ty } = getEdgeParams(sourceNode, targetNode);
+  console.log({ sx, sy, tx, ty });
 
   // Use the calculated sx, sy, tx, and ty to create the edge path
   const [edgePath] = getStraightPath({
