@@ -45,7 +45,7 @@ function DiagramCreator() {
       primaryAttribute: PrimaryAttributeNode,
       derivedAttribute: DerivedAttributeNode,
     }),
-    [],
+    []
   );
 
   const reactFlowInstance = useReactFlow();
@@ -81,20 +81,23 @@ function DiagramCreator() {
       totalParticipationEdge: TotalParticipationEdge,
       dashedLineEdge: DashedLineEdge,
     }),
-    [],
+    []
   );
   const proOptions = { hideAttribution: true };
 
-  const initialNodes = [
-    { id: "1", position: { x: 0, y: 0 }, data: { label: "1" } },
-    { id: "2", position: { x: 0, y: 100 }, data: { label: "2" } },
-  ];
-  const initialEdges = [];
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const initialNodes = localStorage.getItem("nodes") ?? "[]";
+  const initialEdges = localStorage.getItem("edges") ?? "[]";
+  const [nodes, setNodes, onNodesChange] = useNodesState(
+    JSON.parse(initialNodes)
+  );
+  const [edges, setEdges, onEdgesChange] = useEdgesState(
+    JSON.parse(initialEdges)
+  );
 
   useEffect(() => {
     // call API to save current representation, with debounce interval
+    localStorage.setItem("nodes", JSON.stringify(nodes));
+    localStorage.setItem("edges", JSON.stringify(edges));
   }, [nodes, edges]);
 
   const [connectionEdge, setConnectionEdge] = useState("regularEdge");
@@ -103,7 +106,7 @@ function DiagramCreator() {
       setEdges((eds) => {
         return addEdge({ ...params, type: connectionEdge }, eds);
       }),
-    [connectionEdge, setEdges],
+    [connectionEdge, setEdges]
   );
   return (
     <Stack height="100%" width="100%">

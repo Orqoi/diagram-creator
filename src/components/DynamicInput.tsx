@@ -6,7 +6,7 @@ function convertRemToPixels(rem) {
   return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
 }
 
-function DynamicInput({ underline = false }) {
+function DynamicInput({ underline = false, ...props }) {
   const FONT_SIZE = convertRemToPixels(1);
   const DEFAULT_INPUT_WIDTH = 100;
 
@@ -38,6 +38,7 @@ function DynamicInput({ underline = false }) {
       value={textValue}
       onChange={(e) => setTextValue(e.target.value)}
       style={{ position: "relative", zIndex: 2 }}
+      {...props}
     />
   );
 }
