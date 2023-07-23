@@ -3,7 +3,7 @@ import { IconButton, Stack } from "@mui/material";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import EditIcon from "@mui/icons-material/Edit";
 
-function NodeOptionsBar({ onDelete, setDisabled }) {
+function NodeOptionsBar({ onDelete, setDisabled = (e) => {} }) {
   return (
     <Stack
       direction="column"
@@ -17,13 +17,17 @@ function NodeOptionsBar({ onDelete, setDisabled }) {
       <IconButton onClick={onDelete}>
         <HighlightOffIcon color="warning" />
       </IconButton>
-      <IconButton
-        onClick={() => {
-          setDisabled(false);
-        }}
-      >
-        <EditIcon />
-      </IconButton>
+      {setDisabled ? (
+        <IconButton
+          onClick={() => {
+            setDisabled(false);
+          }}
+        >
+          <EditIcon />
+        </IconButton>
+      ) : (
+        <></>
+      )}
     </Stack>
   );
 }

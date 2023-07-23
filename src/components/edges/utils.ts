@@ -225,6 +225,16 @@ enum EllipseShapes {
   "compositeAttribute"
 }
 
+function getHierarchyIntersection(intersectionNode, targetNode) {
+  const {
+    width: intersectionNodeWidth,
+    height: intersectionNodeHeight,
+    positionAbsolute: intersectionNodePosition,
+  } = intersectionNode;
+  return { x: intersectionNodePosition.x + (intersectionNodeWidth / 2), y: intersectionNodePosition.y}
+
+}
+
 function getNodeIntersection(source, target) {
   const type = source.type
   if (type in DiamondShapes) {
@@ -233,6 +243,8 @@ function getNodeIntersection(source, target) {
     return getEllipseIntersection(source, target)
   } else if (type in RectangleShapes) {
     return getRectangleIntersection(source, target)
+  } else if (type === 'hierarchy') {
+    return getHierarchyIntersection(source, target)
   } else {
     throw new Error("Unrecognised Node Type")
   }
@@ -240,7 +252,6 @@ function getNodeIntersection(source, target) {
 
 // returns the parameters (sx, sy, tx, ty, sourcePos, targetPos) you need to create an edge
 export function getEdgeParams(source, target) {
-  console.log(source, "source")
   const sourceIntersectionPoint = getNodeIntersection(source, target);
   const targetIntersectionPoint = getNodeIntersection(target, source);
 

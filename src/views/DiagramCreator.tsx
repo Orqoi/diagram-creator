@@ -50,10 +50,6 @@ function DiagramCreator() {
 
   const reactFlowInstance = useReactFlow();
   const store = useStoreApi();
-  useEffect(() => {
-    console.log(store.getState());
-    console.log(reactFlowInstance);
-  }, [store.getState(), reactFlowInstance]);
 
   const getCenter = useCallback(() => {
     // Get the basic info about the viewport
@@ -89,13 +85,13 @@ function DiagramCreator() {
   const initialNodes = [
     {
       id: "1",
-      type: "compositeAttribute",
+      type: "hierarchy",
       position: { x: 600, y: 0 },
       data: { label: "1" },
     },
     {
       id: "2",
-      type: "compositeAttribute",
+      type: "hierarchy",
       position: { x: 600, y: 400 },
       data: { label: "2" },
     },
