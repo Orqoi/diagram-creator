@@ -50,6 +50,10 @@ function DiagramCreator() {
 
   const reactFlowInstance = useReactFlow();
   const store = useStoreApi();
+  useEffect(() => {
+    console.log(store.getState());
+    console.log(reactFlowInstance);
+  }, [store.getState(), reactFlowInstance]);
 
   const getCenter = useCallback(() => {
     // Get the basic info about the viewport
@@ -117,6 +121,12 @@ function DiagramCreator() {
     localStorage.setItem("edges", JSON.stringify(edges));
   }, [nodes, edges]);
 
+  const [selectedNode, setSelectedNode] = useState(null);
+
+  const onNodeClick = (event, node) => {
+    setSelectedNode(node);
+  };
+
   const [connectionEdge, setConnectionEdge] = useState("regularEdge");
   const onConnect = useCallback(
     (params: any) => {
@@ -148,14 +158,16 @@ function DiagramCreator() {
           edges={edges}
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
+          onNodeClick={onNodeClick}
           onConnect={onConnect}
           proOptions={proOptions}
           maxZoom={10}
           minZoom={0}
+          multiSelectionKeyCode={"Shift"}
         >
           <Controls position="bottom-right" />
         </ReactFlow>
-        <SettingsDrawer />
+        <SettingsDrawer selectedNode={selectedNode} />
       </Stack>
     </Stack>
   );

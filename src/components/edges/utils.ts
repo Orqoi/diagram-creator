@@ -14,7 +14,7 @@ function findNearestCoordinate(coordinates, point) {
 
 // this helper function returns the intersection point
 // of the line between the center of the intersectionNode and the target node
-function getNodeIntersection(intersectionNode, targetNode) {
+function getRectangleIntersection(intersectionNode, targetNode) {
   // https://math.stackexchange.com/questions/1724792/an-algorithm-for-finding-the-intersection-point-between-a-center-of-vision-and-a
   const {
     width: intersectionNodeWidth,
@@ -206,10 +206,43 @@ function getEdgePosition(node, intersectionPoint) {
   return Position.Top;
 }
 
+enum DiamondShapes {
+  "regularRelation",
+  "weakRelation"
+}
+
+enum RectangleShapes {
+  "weak",
+  "regular",
+  "aggregate"
+}
+
+enum EllipseShapes {
+  "regularAttribute",
+  "primaryAttribute",
+  "multiValuedAttribute",
+  "derivedAttribute",
+  "compositeAttribute"
+}
+
+function getNodeIntersection(source, target) {
+  const type = source.type
+  if (type in DiamondShapes) {
+    return getDiamondIntersection(source, target)
+  } else if (type in EllipseShapes) {
+    return getEllipseIntersection(source, target)
+  } else if (type in RectangleShapes) {
+    return getRectangleIntersection(source, target)
+  } else {
+    throw new Error("Unrecognised Node Type")
+  }
+}
+
 // returns the parameters (sx, sy, tx, ty, sourcePos, targetPos) you need to create an edge
 export function getEdgeParams(source, target) {
-  const sourceIntersectionPoint = getDiamondIntersection(source, target);
-  const targetIntersectionPoint = getDiamondIntersection(target, source);
+  console.log(source, "source")
+  const sourceIntersectionPoint = getNodeIntersection(source, target);
+  const targetIntersectionPoint = getNodeIntersection(target, source);
 
   const sourcePos = getEdgePosition(source, sourceIntersectionPoint);
   const targetPos = getEdgePosition(target, targetIntersectionPoint);
