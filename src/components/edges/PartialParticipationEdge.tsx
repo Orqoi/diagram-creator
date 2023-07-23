@@ -1,22 +1,30 @@
 import React, { useCallback } from "react";
 import { BaseEdge, EdgeProps, useStore } from "reactflow";
 import { getEdgeParams } from "./utils";
+import EdgeOptionsBar from "./EdgeOptionsBar";
 
-export default function PartialParticipationEdge({
-  id,
-  source,
-  target,
-  markerEnd,
-  style = {},
-}: EdgeProps) {
+export default function PartialParticipationEdge(props: EdgeProps) {
+  const {
+    id,
+    source,
+    sourceX,
+    sourceY,
+    targetX,
+    targetY,
+    target,
+    style = {},
+    selected,
+  } = props;
+
+  const edgeOptionProps = { sourceX, sourceY, targetX, targetY, selected, id };
   const doubleLineWidth = 1; // Set the width of the double line
 
   // Use the getEdgeParams function to calculate the edge parameters
   const sourceNode = useStore(
-    useCallback((store) => store.nodeInternals.get(source), [source]),
+    useCallback((store) => store.nodeInternals.get(source), [source])
   );
   const targetNode = useStore(
-    useCallback((store) => store.nodeInternals.get(target), [target]),
+    useCallback((store) => store.nodeInternals.get(target), [target])
   );
 
   if (!sourceNode || !targetNode) {
@@ -55,6 +63,7 @@ export default function PartialParticipationEdge({
     <>
       <BaseEdge path={edgePath} style={solidBlackStyle} />
       <BaseEdge path={edgePath} style={solidBlackStyle} />
+      <EdgeOptionsBar {...edgeOptionProps} />
     </>
   );
 }

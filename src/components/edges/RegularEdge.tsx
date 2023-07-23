@@ -1,20 +1,28 @@
 import React, { useCallback } from "react";
 import { BaseEdge, EdgeProps, useStore } from "reactflow";
 import { getEdgeParams } from "./utils";
+import EdgeOptionsBar from "./EdgeOptionsBar";
 
-export default function RegularEdge({
-  id,
-  source,
-  target,
-  markerEnd,
-  style = {},
-}: EdgeProps) {
+export default function RegularEdge(props: EdgeProps) {
+  const {
+    id,
+    source,
+    sourceX,
+    sourceY,
+    targetX,
+    targetY,
+    target,
+    style = {},
+    selected,
+  } = props;
+
+  const edgeOptionProps = { sourceX, sourceY, targetX, targetY, selected, id };
   // Use the getEdgeParams function to calculate the edge parameters
   const sourceNode = useStore(
-    useCallback((store) => store.nodeInternals.get(source), [source]),
+    useCallback((store) => store.nodeInternals.get(source), [source])
   );
   const targetNode = useStore(
-    useCallback((store) => store.nodeInternals.get(target), [target]),
+    useCallback((store) => store.nodeInternals.get(target), [target])
   );
 
   if (!sourceNode || !targetNode) {
@@ -30,6 +38,9 @@ export default function RegularEdge({
   const solidBlackStyle = { ...style, stroke: "black" };
 
   return (
-    <BaseEdge path={edgePath} markerEnd={markerEnd} style={solidBlackStyle} />
+    <>
+      <BaseEdge path={edgePath} style={solidBlackStyle} />
+      <EdgeOptionsBar {...edgeOptionProps} />
+    </>
   );
 }

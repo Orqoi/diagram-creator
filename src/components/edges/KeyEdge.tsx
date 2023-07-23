@@ -1,15 +1,24 @@
 import React, { useCallback } from "react";
 import { BaseEdge, EdgeProps, useStore, getStraightPath } from "reactflow";
 import { getEdgeParams } from "./utils";
+import EdgeOptionsBar from "./EdgeOptionsBar";
 
-export default function KeyEdge({
-  id,
-  source,
-  target,
-  markerEnd,
-  style = {},
-}: EdgeProps) {
+export default function KeyEdge(props: EdgeProps) {
   // Use the getEdgeParams function to calculate the edge parameters
+  const {
+    id,
+    source,
+    sourceX,
+    sourceY,
+    targetX,
+    targetY,
+    target,
+    style = {},
+    selected,
+  } = props;
+
+  const edgeOptionProps = { sourceX, sourceY, targetX, targetY, selected, id };
+
   const sourceNode = useStore(
     useCallback((store) => store.nodeInternals.get(source), [source])
   );
@@ -53,6 +62,7 @@ export default function KeyEdge({
         markerEnd={`url(#arrowhead-${id})`}
         style={solidBlackStyle}
       />
+      <EdgeOptionsBar {...edgeOptionProps} />
     </>
   );
 }

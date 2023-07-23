@@ -28,7 +28,7 @@ function SettingsDrawer({ selectedNode }) {
       paddingLeft={"1rem"}
       paddingRight={"1rem"}
       border="1px solid lightgray"
-      // justifyContent={"flex-end"}
+      justifyContent={"flex-end"}
     >
       {renderNodeOptions()}
       <DownloadButton />
