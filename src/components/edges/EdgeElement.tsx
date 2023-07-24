@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import EdgeOptionsBar from "./EdgeOptionsBar";
 import { BaseEdge, useStore } from "reactflow";
-import { getEdgeParams } from "./utils";
+import { getEdgeParams } from "../../utils/EdgeUtils";
 
 function EdgeElement({
   id,
