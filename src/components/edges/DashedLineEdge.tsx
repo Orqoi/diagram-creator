@@ -1,57 +1,22 @@
-import React from "react";
-import {
-  BaseEdge,
-  EdgeProps,
-  EdgeLabelRenderer,
-  useReactFlow,
-} from "reactflow";
-import { IconButton } from "@mui/material";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import { getStraightPath } from "reactflow";
+import EdgeElement from "./EdgeElement";
 
-export default function DashedLineEdge({
-  id,
-  sourceX,
-  sourceY,
-  targetX,
-  targetY,
-  sourcePosition,
-  targetPosition,
-  style = {},
-  markerEnd,
-  selected,
-}: EdgeProps) {
-  const dashedLinePattern = "5,5"; // Customize the pattern for the dashed line here
-  const edgePath = `M ${sourceX},${sourceY} L ${targetX},${targetY}`;
-  const reactFlowInstance = useReactFlow();
-  const edges = reactFlowInstance.getEdges();
-  const onDelete = () =>
-    reactFlowInstance.setEdges(edges.filter((edge) => edge.id !== id));
+export default function DashedLineEdge(props) {
+  const edgeStyle = { strokeDasharray: "5,5" }; // Customize the pattern for the dashed line here
+  const calculateEdgePath = (sx, sy, tx, ty) => {
+    const [edgePath] = getStraightPath({
+      sourceX: sx,
+      sourceY: sy,
+      targetX: tx,
+      targetY: ty,
+    });
+    return edgePath;
+  };
 
-  return (
-    <>
-      <BaseEdge
-        path={edgePath}
-        markerEnd={markerEnd}
-        style={{ ...style, strokeDasharray: dashedLinePattern }}
-      />
-      {selected && (
-        <EdgeLabelRenderer>
-          <div
-            style={{
-              position: "absolute",
-              transform: `translate(50%, -50%) translate(${
-                (sourceX + targetX) / 2
-              }px,${(sourceY + targetY) / 2}px)`,
-              pointerEvents: "all",
-            }}
-            className="nodrag nopan"
-          >
-            <IconButton onClick={onDelete}>
-              <HighlightOffIcon color="warning" />
-            </IconButton>
-          </div>
-        </EdgeLabelRenderer>
-      )}
-    </>
-  );
+  const otherProps = {
+    edgeStyle,
+    calculateEdgePath,
+  };
+
+  return <EdgeElement {...props} {...otherProps} />;
 }

@@ -1,8 +1,4 @@
-import { Position, MarkerType } from "reactflow";
-
-function calculateDistance(p1, p2) {
-  return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
-}
+import { Position } from "reactflow";
 
 function findNearestCoordinate(coordinates, point) {
   return coordinates.reduce((nearest, current) => {
@@ -182,30 +178,6 @@ function getDiamondIntersection(intersectionNode, targetNode) {
   return findNearestCoordinate(intersectionPoints, {x: x1, y: y1});
 }
 
-// returns the position (top,right,bottom or right) passed node compared to the intersection point
-function getEdgePosition(node, intersectionPoint) {
-  const n = { ...node.positionAbsolute, ...node };
-  const nx = Math.round(n.x);
-  const ny = Math.round(n.y);
-  const px = Math.round(intersectionPoint.x);
-  const py = Math.round(intersectionPoint.y);
-
-  if (px <= nx + 1) {
-    return Position.Left;
-  }
-  if (px >= nx + n.width - 1) {
-    return Position.Right;
-  }
-  if (py <= ny + 1) {
-    return Position.Top;
-  }
-  if (py >= n.y + n.height - 1) {
-    return Position.Bottom;
-  }
-
-  return Position.Top;
-}
-
 enum DiamondShapes {
   "regularRelation",
   "weakRelation"
@@ -255,15 +227,10 @@ export function getEdgeParams(source, target) {
   const sourceIntersectionPoint = getNodeIntersection(source, target);
   const targetIntersectionPoint = getNodeIntersection(target, source);
 
-  const sourcePos = getEdgePosition(source, sourceIntersectionPoint);
-  const targetPos = getEdgePosition(target, targetIntersectionPoint);
-
   return {
     sx: sourceIntersectionPoint.x,
     sy: sourceIntersectionPoint.y,
     tx: targetIntersectionPoint.x,
-    ty: targetIntersectionPoint.y,
-    sourcePos,
-    targetPos,
+    ty: targetIntersectionPoint.y
   };
 }

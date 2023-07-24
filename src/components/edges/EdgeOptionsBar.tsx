@@ -8,6 +8,15 @@ function EdgeOptionsBar({ selected, sourceX, targetX, sourceY, targetY, id }) {
   const edges = reactFlowInstance.getEdges();
   const onDelete = () =>
     reactFlowInstance.setEdges(edges.filter((edge) => edge.id !== id));
+
+  // Calculate the midpoint of the line
+  const midpointX = (sourceX + targetX) / 2;
+  const midpointY = (sourceY + targetY) / 2;
+
+  // Calculate the angle of the line in degrees
+  const angleDeg =
+    (Math.atan2(targetY - sourceY, targetX - sourceX) * 180) / Math.PI;
+
   return (
     <>
       {selected && (
@@ -15,9 +24,8 @@ function EdgeOptionsBar({ selected, sourceX, targetX, sourceY, targetY, id }) {
           <div
             style={{
               position: "absolute",
-              transform: `translate(50%, -50%) translate(${
-                (sourceX + targetX) / 2
-              }px,${(sourceY + targetY) / 2}px)`,
+              top: midpointY,
+              left: midpointX,
               pointerEvents: "all",
             }}
             className="nodrag nopan"

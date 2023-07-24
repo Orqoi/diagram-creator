@@ -1,46 +1,24 @@
-import React, { useCallback } from "react";
-import { BaseEdge, EdgeProps, useStore } from "reactflow";
-import { getEdgeParams } from "./utils";
-import EdgeOptionsBar from "./EdgeOptionsBar";
+import { getStraightPath } from "reactflow";
+import EdgeElement from "./EdgeElement";
 
-export default function RegularEdge(props: EdgeProps) {
-  const {
-    id,
-    source,
-    sourceX,
-    sourceY,
-    targetX,
-    targetY,
-    target,
-    style = {},
-    selected,
-  } = props;
-
-  const edgeOptionProps = { sourceX, sourceY, targetX, targetY, selected, id };
-  // Use the getEdgeParams function to calculate the edge parameters
-  const sourceNode = useStore(
-    useCallback((store) => store.nodeInternals.get(source), [source])
-  );
-  const targetNode = useStore(
-    useCallback((store) => store.nodeInternals.get(target), [target])
-  );
-
-  if (!sourceNode || !targetNode) {
-    return null;
-  }
-
-  const edgeParams = getEdgeParams(sourceNode, targetNode);
-  const { sx, sy, tx, ty } = edgeParams;
-
-  const edgePath = `M ${sx},${sy} L ${tx},${ty}`;
+export default function RegularEdge(props) {
+  const calculateEdgePath = (sx, sy, tx, ty) => {
+    const [edgePath] = getStraightPath({
+      sourceX: sx,
+      sourceY: sy,
+      targetX: tx,
+      targetY: ty,
+    });
+    return edgePath;
+  };
 
   // Override the default styles for BaseEdge to set the stroke color to black
-  const solidBlackStyle = { ...style, stroke: "black" };
+  const edgeStyle = { stroke: "black" };
 
-  return (
-    <>
-      <BaseEdge path={edgePath} style={solidBlackStyle} />
-      <EdgeOptionsBar {...edgeOptionProps} />
-    </>
-  );
+  const otherProps = {
+    edgeStyle,
+    calculateEdgePath,
+  };
+
+  return <EdgeElement {...props} {...otherProps} />;
 }
